@@ -1,0 +1,24 @@
+# Example configuration for subdomain deployment
+# This shows how a business can use their main domain (example.com) for trust
+# while running the actual issuer service on a subdomain (api.example.com)
+
+# The address where the issuer service binds
+bind_address = "0.0.0.0:3000"
+
+# The actual domain where the service is running
+domain = "api.example.com"
+
+# The trust domain that will appear in attestations
+# This is the main domain that users recognize and trust
+trust_domain = "example.com"
+
+# The full URL of this service (used for service discovery)
+# This helps verifiers find the actual service when they look up the trust domain
+service_url = "https://api.example.com"
+
+# Attestation validity period
+attestation_validity_days = 365
+
+# Private key path (generate with hesha-cli or similar)
+# In production, use environment variables or secure key management
+# private_key_path = "/path/to/private.key"

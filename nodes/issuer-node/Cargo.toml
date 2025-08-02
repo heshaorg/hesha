@@ -1,0 +1,33 @@
+[package]
+name = "issuer-node"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Reference issuer node for the Hesha Protocol"
+
+[[bin]]
+name = "issuer-node"
+path = "src/main.rs"
+
+[dependencies]
+hesha-types = { path = "../../crates/hesha-types" }
+hesha-crypto = { path = "../../crates/hesha-crypto" }
+hesha-core = { path = "../../crates/hesha-core" }
+axum = { workspace = true }
+tokio = { workspace = true }
+tower = { workspace = true }
+tower-http = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+uuid = { version = "1.6", features = ["v4", "serde"] }
+chrono = { workspace = true }
+anyhow = { workspace = true }
+
+[dev-dependencies]
+hesha-client = { path = "../../crates/hesha-client" }
+reqwest = { workspace = true }

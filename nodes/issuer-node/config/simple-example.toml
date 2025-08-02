@@ -1,0 +1,18 @@
+# Example configuration for simple single-domain deployment
+# This is the standard setup where the service runs on the same domain used for trust
+
+# The address where the issuer service binds
+bind_address = "0.0.0.0:3000"
+
+# The domain where the service is running (also used as trust domain)
+domain = "issuer.example.com"
+
+# No trust_domain specified - will default to using 'domain'
+# No service_url specified - not needed for single-domain setup
+
+# Attestation validity period
+attestation_validity_days = 365
+
+# Private key path (generate with hesha-cli or similar)
+# In production, use environment variables or secure key management
+# private_key_path = "/path/to/private.key"

@@ -1,0 +1,29 @@
+[package]
+name = "hesha-core"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Core protocol logic for the Hesha Protocol"
+
+[dependencies]
+hesha-types = { path = "../hesha-types" }
+hesha-crypto = { path = "../hesha-crypto" }
+jsonwebtoken = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+thiserror = { workspace = true }
+reqwest = { workspace = true }
+tokio = { workspace = true }
+uuid = { version = "1.6", features = ["v4"] }
+hex = { workspace = true }
+base64 = { workspace = true }
+regex = "1.10"
+
+[dev-dependencies]
+proptest = { workspace = true }
+tokio-test = "0.4"
+anyhow = { workspace = true }

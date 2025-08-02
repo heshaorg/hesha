@@ -1,0 +1,44 @@
+[package]
+name = "hesha-cli"
+version = "0.1.0"
+edition = "2021"
+authors = ["Hesha Protocol Contributors"]
+description = "Command-line interface for Hesha Protocol"
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "hesha"
+path = "src/main.rs"
+
+[dependencies]
+# Workspace dependencies
+hesha-types = { path = "../../crates/hesha-types" }
+hesha-crypto = { path = "../../crates/hesha-crypto" }
+hesha-core = { path = "../../crates/hesha-core" }
+hesha-client = { path = "../../crates/hesha-client" }
+
+# CLI framework
+clap = { version = "4", features = ["derive", "env"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# Terminal output
+colored = "2"
+
+# Utilities
+dirs = "5"
+hex = "0.4"
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"
