@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hesha Protocol - Privacy-Preserving Phone Number Proxies</title>
-    <meta name="description" content="Hesha Protocol enables privacy-preserving phone number proxies through cryptographic attestations. Never share your real phone number again.">
+    <title>Hesha Protocol - Your Phone Number, Your Privacy</title>
+    <meta name="description" content="Never share your real phone number again. Hesha Protocol provides cryptographically verifiable proxy numbers that protect your privacy while proving phone ownership.">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -17,10 +17,11 @@
                 <a href="/">Hesha Protocol</a>
             </div>
             <ul class="nav-menu">
-                <li><a href="#features">Features</a></li>
+                <li><a href="#problem">Problem</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="https://github.com/heshaorg/hesha/tree/main/docs" target="_blank">Documentation</a></li>
-                <li><a href="https://github.com/heshaorg/hesha" target="_blank">GitHub</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="https://github.com/heshaorg/hesha/tree/main/docs" target="_blank">Docs</a></li>
+                <li><a href="https://github.com/heshaorg/hesha" target="_blank" class="btn-nav">GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -28,22 +29,26 @@
     <header class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="alpha-badge">ALPHA PREVIEW</div>
-                <h1>Your Phone Number.<br>Your Privacy.</h1>
-                <p class="hero-subtitle">
-                    Hesha Protocol lets you prove phone ownership without revealing your number. 
-                    Get cryptographically verifiable proxy numbers that preserve your privacy.
+                <div class="alpha-badge animate-bounce">🚀 ALPHA PREVIEW</div>
+                <h1 class="animate-fade-in">Never Share Your<br>Real Phone Number<br><span class="gradient-text">Ever Again</span></h1>
+                <p class="hero-subtitle animate-slide-up">
+                    Hesha Protocol creates privacy-preserving proxy phone numbers that are cryptographically verifiable. 
+                    Services can verify you own a real phone number without ever seeing it.
                 </p>
-                <div class="hero-actions">
-                    <a href="https://github.com/heshaorg/hesha/tree/main/docs" class="btn btn-primary" target="_blank">Read the Docs</a>
-                    <a href="https://github.com/heshaorg/hesha" class="btn btn-secondary">View on GitHub</a>
+                <div class="hero-actions animate-slide-up">
+                    <a href="#how-it-works" class="btn btn-primary btn-large">See How It Works</a>
+                    <a href="https://github.com/heshaorg/hesha" class="btn btn-secondary btn-large">View on GitHub</a>
                 </div>
-                <div class="hero-code">
-                    <pre><code>Your real number: +1 (555) 123-4567
-Your proxy number: +1-001-234-5678
-
-<span class="comment"># Services verify you own a real number</span>
-<span class="comment"># But they never see it</span></code></pre>
+                <div class="hero-demo animate-fade-in">
+                    <div class="demo-card">
+                        <div class="demo-label">Instead of sharing:</div>
+                        <div class="demo-number bad">+1 (555) 123-4567</div>
+                    </div>
+                    <div class="demo-arrow">→</div>
+                    <div class="demo-card">
+                        <div class="demo-label">You share:</div>
+                        <div class="demo-number good">+1-001-234-5678</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,149 +56,244 @@ Your proxy number: +1-001-234-5678
 
     <section class="section" id="problem">
         <div class="container">
-            <h2>The Problem</h2>
-            <div class="problem-grid">
-                <div class="problem-item">
-                    <div class="problem-icon">📱</div>
-                    <h3>Privacy Risk</h3>
-                    <p>Every app wants your phone number, creating a massive privacy risk as your real number spreads across countless databases.</p>
+            <div class="section-header">
+                <h2>Your Phone Number is <span class="text-danger">Everywhere</span></h2>
+                <p class="section-subtitle">And that's a massive privacy problem</p>
+            </div>
+            
+            <div class="problem-visual">
+                <img src="assets/images/privacy-problem.svg" alt="Privacy Problem Visualization" class="full-width-image animate-on-scroll" />
+            </div>
+            
+            <div class="problem-stats">
+                <div class="stat-card">
+                    <div class="stat-number">82%</div>
+                    <div class="stat-label">of data breaches include phone numbers</div>
                 </div>
-                <div class="problem-item">
-                    <div class="problem-icon">🎯</div>
-                    <h3>Data Breaches</h3>
-                    <p>When services get hacked, your phone number is exposed, leading to spam, scams, and identity theft.</p>
+                <div class="stat-card">
+                    <div class="stat-number">3.5B</div>
+                    <div class="stat-label">phone numbers leaked in 2023 alone</div>
                 </div>
-                <div class="problem-item">
-                    <div class="problem-icon">🔗</div>
-                    <h3>Cross-Service Tracking</h3>
-                    <p>The same phone number links your identity across every service, destroying anonymity and enabling surveillance.</p>
+                <div class="stat-card">
+                    <div class="stat-number">$2.7M</div>
+                    <div class="stat-label">average cost of identity theft</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section bg-light" id="solution">
+    <section class="section bg-gradient" id="solution-intro">
         <div class="container">
-            <h2>The Solution</h2>
-            <div class="solution-content">
-                <div class="solution-text">
-                    <h3>Cryptographic Phone Number Proxies</h3>
-                    <p>
-                        Hesha introduces proxy phone numbers that are cryptographically tied to your real number 
-                        without revealing it. Services can verify you own a real phone number, but they never see it.
-                    </p>
-                    <ul class="feature-list">
-                        <li>One-time phone verification with trusted issuers</li>
-                        <li>Receive permanent, cryptographically signed attestations</li>
-                        <li>Share proxy numbers instead of your real number</li>
-                        <li>Services verify offline without contacting anyone</li>
-                    </ul>
-                </div>
-                <div class="solution-diagram">
-                    <img src="assets/images/protocol-flow.svg" alt="Hesha Protocol Flow" />
+            <div class="solution-intro-content">
+                <h2>Introducing <span class="gradient-text">Hesha Protocol</span></h2>
+                <p class="large-text">
+                    A revolutionary approach to phone number privacy using cryptographic attestations
+                </p>
+                <div class="solution-benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon">🔐</div>
+                        <div class="benefit-text">Cryptographically Secure</div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">🌐</div>
+                        <div class="benefit-text">Works Everywhere</div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">⚡</div>
+                        <div class="benefit-text">Instant Verification</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="features">
+    <section class="section" id="how-it-works">
         <div class="container">
-            <h2>Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Privacy First</h3>
-                    <p>Your real phone number is never shared with services. Only cryptographic proofs.</p>
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p class="section-subtitle">Four simple steps to permanent privacy</p>
+            </div>
+            
+            <!-- Step 1 -->
+            <div class="step-section">
+                <div class="step-content">
+                    <div class="step-text">
+                        <div class="step-number-large">01</div>
+                        <h3>One-Time Verification</h3>
+                        <p>Verify your phone number once with a trusted issuer using standard SMS or call verification. This is the only time you'll ever need to share your real number.</p>
+                        <ul class="check-list">
+                            <li>Choose from multiple trusted issuers</li>
+                            <li>Standard SMS/call verification</li>
+                            <li>Never need to reverify</li>
+                        </ul>
+                    </div>
+                    <div class="step-visual">
+                        <img src="assets/images/step-1-verify.svg" alt="One-time verification" class="animate-on-scroll" />
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Decentralized</h3>
-                    <p>No central authority. Multiple issuers can participate in the ecosystem.</p>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step-section reverse">
+                <div class="step-content">
+                    <div class="step-text">
+                        <div class="step-number-large">02</div>
+                        <h3>Generate Proxy Number</h3>
+                        <p>A unique proxy number is generated using cryptographic algorithms. It looks like a real phone number but contains no information about your actual number.</p>
+                        <ul class="check-list">
+                            <li>Deterministic generation</li>
+                            <li>Unique to you and the issuer</li>
+                            <li>Indistinguishable from real numbers</li>
+                        </ul>
+                    </div>
+                    <div class="step-visual">
+                        <img src="assets/images/step-2-generate.svg" alt="Generate proxy number" class="animate-on-scroll" />
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Offline Verification</h3>
-                    <p>Services verify attestations locally without API calls or network requests.</p>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step-section">
+                <div class="step-content">
+                    <div class="step-text">
+                        <div class="step-number-large">03</div>
+                        <h3>Receive Attestation</h3>
+                        <p>The issuer creates a cryptographically signed JWT attestation that proves you own a real phone number without revealing what it is.</p>
+                        <ul class="check-list">
+                            <li>Digitally signed by issuer</li>
+                            <li>Contains binding proof</li>
+                            <li>Permanent and portable</li>
+                        </ul>
+                    </div>
+                    <div class="step-visual">
+                        <img src="assets/images/step-3-attestation.svg" alt="Receive attestation" class="animate-on-scroll" />
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👤</div>
-                    <h3>User Control</h3>
-                    <p>Explicit consent for each use. You control when and how your proxy is shared.</p>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="step-section reverse">
+                <div class="step-content">
+                    <div class="step-text">
+                        <div class="step-number-large">04</div>
+                        <h3>Share Everywhere</h3>
+                        <p>Use your proxy number everywhere you'd normally use your phone number. Services can verify it cryptographically without any API calls.</p>
+                        <ul class="check-list">
+                            <li>Works with any service</li>
+                            <li>No spam or tracking</li>
+                            <li>Full control over your privacy</li>
+                        </ul>
+                    </div>
+                    <div class="step-visual">
+                        <img src="assets/images/step-4-share.svg" alt="Share your proxy" class="animate-on-scroll" />
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
-                    <h3>Standard Crypto</h3>
-                    <p>Built on proven standards: Ed25519, SHA-256, and JWT.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Binding Proofs</h3>
-                    <p>Cryptographic binding prevents proxy number substitution attacks.</p>
-                </div>
+            </div>
+            
+            <!-- Verification Process -->
+            <div class="verification-section">
+                <h3>Services Verify Instantly, Offline</h3>
+                <p>No API calls, no tracking, no privacy leaks</p>
+                <img src="assets/images/verification-flow.svg" alt="Verification flow" class="full-width-image animate-on-scroll" />
             </div>
         </div>
     </section>
 
-    <section class="section bg-light" id="how-it-works">
+    <section class="section bg-light" id="use-cases">
         <div class="container">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Verify Your Phone</h3>
-                    <p>Prove ownership to a trusted issuer via SMS or call (one-time only)</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Get Attestation</h3>
-                    <p>Receive a cryptographically signed JWT attestation with your proxy number</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Share Proxy</h3>
-                    <p>Use your proxy number instead of your real number everywhere</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Offline Verification</h3>
-                    <p>Services verify the attestation cryptographically without any API calls</p>
+            <div class="section-header">
+                <h2>Built for Every Scenario</h2>
+                <p class="section-subtitle">From dating apps to crypto trading, protect your privacy everywhere</p>
+            </div>
+            
+            <div class="use-cases-visual">
+                <img src="assets/images/use-cases.svg" alt="Use cases" class="full-width-image animate-on-scroll" />
+            </div>
+            
+            <div class="early-adopter-section">
+                <h3>Be Part of the Privacy Revolution</h3>
+                <p>We're looking for early adopters to help test and improve Hesha Protocol</p>
+                <div class="early-adopter-cta">
+                    <a href="https://github.com/heshaorg/hesha/issues" class="btn btn-primary">Share Your Use Case</a>
+                    <p class="cta-note">Help us understand how you'd use proxy numbers</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="use-cases">
+    <section class="section bg-gradient-dark" id="technical">
         <div class="container">
-            <h2>Use Cases</h2>
-            <div class="use-cases-grid">
-                <div class="use-case">
-                    <h3>🔒 Privacy Apps</h3>
-                    <p>Replace phone number requirements with verifiable proxies</p>
+            <div class="section-header text-white">
+                <h2>Built on Solid Foundations</h2>
+                <p class="section-subtitle">Industry-standard cryptography, no proprietary magic</p>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🔑</div>
+                    <h3>Ed25519</h3>
+                    <p>Modern elliptic curve signatures for unforgeable attestations</p>
                 </div>
-                <div class="use-case">
-                    <h3>💸 Crypto Transactions</h3>
-                    <p>Share proxy numbers for P2P trades without doxxing</p>
+                <div class="tech-card">
+                    <div class="tech-icon">🔐</div>
+                    <h3>SHA-256</h3>
+                    <p>Cryptographic hashing ensures phone numbers stay private</p>
                 </div>
-                <div class="use-case">
-                    <h3>🛍️ Marketplaces</h3>
-                    <p>Enable buyer-seller communication without phone exposure</p>
+                <div class="tech-card">
+                    <div class="tech-icon">📜</div>
+                    <h3>JWT</h3>
+                    <p>Standard token format for maximum compatibility</p>
                 </div>
-                <div class="use-case">
-                    <h3>👥 Social Platforms</h3>
-                    <p>Prevent phone harvesting while maintaining verification</p>
+                <div class="tech-card">
+                    <div class="tech-icon">🦀</div>
+                    <h3>Rust</h3>
+                    <p>Memory-safe implementation for security-critical code</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section bg-dark" id="cta">
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Is this like a burner phone number?</h3>
+                    <p>No, it's better. Burner numbers are temporary and tied to specific services. Hesha proxy numbers are permanent, cryptographically verifiable, and work everywhere.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can services still verify I have a real phone?</h3>
+                    <p>Yes! That's the beauty of it. Services can cryptographically verify you own a real, verified phone number without ever seeing what that number is.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What if the issuer goes offline?</h3>
+                    <p>No problem! Verification works completely offline. Once you have your attestation, services can verify it without contacting anyone.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is this legal?</h3>
+                    <p>Absolutely. You're not hiding from law enforcement or evading regulations. You're simply choosing what personal information to share, which is your right.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-dark cta-section" id="cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Get Started?</h2>
-                <p>Hesha Protocol is in alpha. We're looking for early adopters and contributors.</p>
+                <h2 class="text-white">Ready to Take Back Your Privacy?</h2>
+                <p class="text-light">Hesha Protocol is in alpha and we need your help to make it better</p>
                 <div class="cta-actions">
-                    <a href="https://github.com/heshaorg/hesha/tree/main/docs" class="btn btn-light" target="_blank">Read Documentation</a>
-                    <a href="https://github.com/heshaorg/hesha" class="btn btn-outline">Contribute on GitHub</a>
+                    <a href="https://github.com/heshaorg/hesha" class="btn btn-light btn-large">Explore on GitHub</a>
+                    <a href="https://github.com/heshaorg/hesha/tree/main/docs" class="btn btn-outline-light btn-large">Read the Docs</a>
+                </div>
+                <div class="cta-badges">
+                    <span class="badge">🔒 Privacy First</span>
+                    <span class="badge">🌐 Decentralized</span>
+                    <span class="badge">⚡ Instant Verification</span>
+                    <span class="badge">🛡️ Cryptographically Secure</span>
                 </div>
             </div>
         </div>
@@ -208,12 +308,12 @@ Your proxy number: +1-001-234-5678
                     <p class="footer-warning">⚠️ Alpha software - not production ready</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Documentation</h4>
+                    <h4>Resources</h4>
                     <ul>
                         <li><a href="https://github.com/heshaorg/hesha/blob/main/docs/whitepaper.md" target="_blank">Whitepaper</a></li>
                         <li><a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-protocol-specification.md" target="_blank">Protocol Spec</a></li>
-                        <li><a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-issuer-node-specification.md" target="_blank">Issuer Guide</a></li>
-                        <li><a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-wallet-specification.md" target="_blank">Wallet Spec</a></li>
+                        <li><a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-issuer-node-specification.md" target="_blank">Run an Issuer</a></li>
+                        <li><a href="https://github.com/heshaorg/hesha/tree/main/docs" target="_blank">All Documentation</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -222,14 +322,46 @@ Your proxy number: +1-001-234-5678
                         <li><a href="https://github.com/heshaorg/hesha">GitHub</a></li>
                         <li><a href="https://github.com/heshaorg/hesha/issues">Report Issues</a></li>
                         <li><a href="https://github.com/heshaorg/hesha/blob/main/CONTRIBUTING.md">Contributing</a></li>
+                        <li><a href="https://github.com/heshaorg/hesha/blob/main/SECURITY.md">Security</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Hesha Protocol. Released under MIT License.</p>
-                <p>Made with ❤️ by privacy advocates worldwide</p>
+                <p>Privacy is not about hiding, it's about choosing what to share.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

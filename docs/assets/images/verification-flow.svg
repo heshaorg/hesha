@@ -1,0 +1,85 @@
+<svg width="700" height="400" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="verifyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#e5e7eb"/>
+      <circle cx="12" cy="12" r="1" fill="#e5e7eb"/>
+    </pattern>
+  </defs>
+  
+  <!-- Title -->
+  <text x="350" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#1f2937">Offline Verification - No API Calls!</text>
+  
+  <!-- User shares with service -->
+  <g transform="translate(50, 100)">
+    <!-- User -->
+    <circle cx="40" cy="40" r="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="40" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="20">👤</text>
+    <text x="40" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">User</text>
+    
+    <!-- Attestation -->
+    <rect x="90" y="20" width="80" height="40" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+    <text x="130" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#92400e">JWT</text>
+    <text x="130" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#92400e">eyJ0eXAi...</text>
+  </g>
+  
+  <!-- Arrow to service -->
+  <path d="M 220 120 L 300 120" stroke="#6366f1" stroke-width="3" marker-end="url(#arrow1)"/>
+  <text x="260" y="110" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#6366f1">Shares proxy + JWT</text>
+  
+  <!-- Service verification -->
+  <g transform="translate(350, 80)">
+    <rect x="0" y="0" width="300" height="240" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
+    <rect x="0" y="0" width="300" height="240" rx="10" fill="url(#dots)" opacity="0.5"/>
+    
+    <!-- Service header -->
+    <rect x="0" y="0" width="300" height="40" rx="10" fill="#1f2937"/>
+    <text x="150" y="25" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="white">Service Verification Process</text>
+    
+    <!-- Step 1 -->
+    <circle cx="30" cy="70" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
+    <text x="30" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">1</text>
+    <text x="130" y="75" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Extract issuer from JWT</text>
+    
+    <!-- Step 2 -->
+    <circle cx="30" cy="110" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
+    <text x="30" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">2</text>
+    <text x="130" y="115" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Fetch cached public key</text>
+    
+    <!-- Step 3 -->
+    <circle cx="30" cy="150" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
+    <text x="30" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">3</text>
+    <text x="130" y="155" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Verify JWT signature</text>
+    
+    <!-- Step 4 -->
+    <circle cx="30" cy="190" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
+    <text x="30" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">4</text>
+    <text x="130" y="195" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Check binding proof</text>
+    
+    <!-- Checkmark -->
+    <circle cx="260" cy="130" r="25" fill="#10b981" stroke="#059669" stroke-width="3"/>
+    <path d="M 245 130 L 255 140 L 275 120" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- No network indicator -->
+  <g transform="translate(500, 50)">
+    <circle cx="0" cy="0" r="20" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <path d="M -10 -10 L 10 10 M 10 -10 L -10 10" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+    <text x="0" y="-30" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#991b1b">No Network</text>
+    <text x="0" y="-45" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#991b1b">Required!</text>
+  </g>
+  
+  <!-- Benefits -->
+  <rect x="100" y="350" width="500" height="35" rx="17" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+  <text x="350" y="373" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#065f46">⚡ Instant • 🔒 Cryptographic • 🌐 Works offline • 🛡️ No tracking • 📱 Privacy preserved</text>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6366f1"/>
+    </marker>
+  </defs>
+</svg>

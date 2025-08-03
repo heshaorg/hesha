@@ -1,0 +1,89 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dangerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:0.3" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#1f2937">Your Phone Number is Everywhere</text>
+  
+  <!-- Central Phone -->
+  <circle cx="400" cy="200" r="60" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="2" filter="url(#shadow)"/>
+  <text x="400" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Your Phone</text>
+  <text x="400" y="210" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="14" font-weight="500" fill="#1f2937">+1-555-1234</text>
+  
+  <!-- Danger zone background -->
+  <circle cx="400" cy="200" r="180" fill="url(#dangerGrad)" stroke="#ef4444" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
+  
+  <!-- Services collecting phone number -->
+  <!-- Social Media -->
+  <rect x="80" y="80" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="140" y="105" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Social Media</text>
+  <text x="140" y="125" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">📱 Required</text>
+  
+  <!-- Dating Apps -->
+  <rect x="240" y="60" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="300" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Dating Apps</text>
+  <text x="300" y="105" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">💔 Exposed</text>
+  
+  <!-- Shopping -->
+  <rect x="440" y="60" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="500" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">E-commerce</text>
+  <text x="500" y="105" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">🛍️ Tracked</text>
+  
+  <!-- Banking -->
+  <rect x="600" y="80" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="660" y="105" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Banking</text>
+  <text x="660" y="125" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">🏦 Targeted</text>
+  
+  <!-- Crypto -->
+  <rect x="640" y="180" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="700" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Crypto</text>
+  <text x="700" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">₿ Doxxed</text>
+  
+  <!-- Healthcare -->
+  <rect x="600" y="280" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="660" y="305" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Healthcare</text>
+  <text x="660" y="325" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">🏥 Leaked</text>
+  
+  <!-- Government -->
+  <rect x="440" y="300" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="500" y="325" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Government</text>
+  <text x="500" y="345" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">🏛️ Monitored</text>
+  
+  <!-- Food Delivery -->
+  <rect x="240" y="300" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="300" y="325" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Food Delivery</text>
+  <text x="300" y="345" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">🍕 Spammed</text>
+  
+  <!-- Messaging -->
+  <rect x="80" y="280" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="140" y="305" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Messaging</text>
+  <text x="140" y="325" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">💬 Harvested</text>
+  
+  <!-- Gaming -->
+  <rect x="40" y="180" width="120" height="60" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2" filter="url(#shadow)"/>
+  <text x="100" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#1f2937">Gaming</text>
+  <text x="100" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#ef4444">🎮 Scammed</text>
+  
+  <!-- Connection lines -->
+  <line x1="340" y1="200" x2="200" y2="110" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="360" y1="170" x2="300" y2="120" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="420" y1="160" x2="500" y2="120" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="450" y1="180" x2="600" y2="110" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="460" y1="200" x2="640" y2="210" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="450" y1="220" x2="600" y2="310" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="420" y1="240" x2="500" y2="300" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="360" y1="230" x2="300" y2="300" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="340" y1="200" x2="200" y2="310" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  <line x1="330" y1="180" x2="160" y2="210" stroke="#ef4444" stroke-width="1" opacity="0.5" stroke-dasharray="2,2"/>
+  
+  <!-- Warning message -->
+  <rect x="250" y="380" width="300" height="40" rx="20" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="400" y="404" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#92400e">⚠️ One breach exposes you everywhere</text>
+</svg>
