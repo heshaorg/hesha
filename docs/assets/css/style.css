@@ -875,6 +875,101 @@ body {
     color: var(--text-light);
 }
 
+/* Cost Savings Section */
+.cost-benefits {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.benefit-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.comparison-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+}
+
+.comparison-card.traditional {
+    border: 2px solid var(--danger-color);
+}
+
+.comparison-card.hesha {
+    border: 2px solid var(--success-color);
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.comparison-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.pain-points, .benefits-list {
+    list-style: none;
+}
+
+.pain-points li, .benefits-list li {
+    padding: 0.75rem 0;
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.integration-simplicity {
+    text-align: center;
+}
+
+.integration-simplicity h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.workflow-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.workflow-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.workflow-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.workflow-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.workflow-card h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.workflow-card p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+
 /* Become Issuer Section */
 .issuer-visual {
     margin-bottom: 4rem;
@@ -1353,6 +1448,28 @@ body {
     
     .implementation-section {
         padding: 2rem 1.5rem;
+    }
+    
+    .benefit-comparison {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .comparison-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .pain-points li, .benefits-list li {
+        font-size: 1rem;
+    }
+    
+    .workflow-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .workflow-card {
+        padding: 1.5rem;
     }
     
     .verification-flow {
