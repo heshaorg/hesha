@@ -658,13 +658,10 @@ body {
     border: 2px solid var(--primary-light);
 }
 
-.flow-image {
-    width: 100%;
-    max-width: 200px;
-    height: 120px;
+.flow-icon {
+    font-size: 4rem;
     margin-bottom: 1rem;
-    border-radius: 8px;
-    background: white;
+    display: block;
 }
 
 .flow-step h4 {
