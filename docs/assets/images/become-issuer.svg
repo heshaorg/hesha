@@ -1,0 +1,110 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="issuerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="moneyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#1f2937">Become a Hesha Issuer</text>
+  
+  <!-- Issuer Server -->
+  <g transform="translate(300, 80)">
+    <rect x="0" y="0" width="200" height="120" rx="10" fill="url(#issuerGrad)" stroke="#059669" stroke-width="2" filter="url(#glow)"/>
+    
+    <!-- Server elements -->
+    <rect x="20" y="20" width="160" height="10" rx="5" fill="white" opacity="0.8"/>
+    <rect x="20" y="40" width="160" height="10" rx="5" fill="white" opacity="0.8"/>
+    <rect x="20" y="60" width="160" height="10" rx="5" fill="white" opacity="0.8"/>
+    
+    <!-- Status light -->
+    <circle cx="170" cy="90" r="8" fill="#86efac" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <text x="100" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">Issuer Node</text>
+  </g>
+  
+  <!-- Verification Flow -->
+  <g transform="translate(50, 150)">
+    <!-- User -->
+    <circle cx="40" cy="40" r="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="40" y="45" text-anchor="middle" font-size="20">👤</text>
+    <text x="40" y="90" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Users</text>
+    
+    <!-- Arrow to issuer -->
+    <path d="M 70 40 L 180 40" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow1)"/>
+    <text x="125" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#6366f1">Verify Phone</text>
+    
+    <!-- Phone verification -->
+    <rect x="200" y="20" width="100" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+    <text x="250" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#1e40af">SMS/Call</text>
+    <text x="250" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#1e40af">Verification</text>
+  </g>
+  
+  <!-- Revenue Stream -->
+  <g transform="translate(550, 150)">
+    <rect x="0" y="20" width="150" height="60" rx="10" fill="url(#moneyGrad)" stroke="#f59e0b" stroke-width="2"/>
+    <text x="75" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">Revenue Stream</text>
+    <text x="75" y="65" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#fef3c7">$0.50 - $5.00 per attestation</text>
+    
+    <!-- Money icons -->
+    <text x="20" y="45" font-size="20">💰</text>
+    <text x="130" y="45" font-size="20">💵</text>
+  </g>
+  
+  <!-- Benefits -->
+  <g transform="translate(50, 280)">
+    <rect x="0" y="0" width="700" height="150" rx="10" fill="#f0fdf4" stroke="#10b981" stroke-width="1"/>
+    
+    <text x="350" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#065f46">Why Become an Issuer?</text>
+    
+    <!-- Benefit items -->
+    <g transform="translate(30, 50)">
+      <circle cx="15" cy="15" r="15" fill="#10b981"/>
+      <text x="15" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">1</text>
+      <text x="40" y="20" font-family="Inter, sans-serif" font-size="14" fill="#065f46">New revenue stream from attestation fees</text>
+    </g>
+    
+    <g transform="translate(370, 50)">
+      <circle cx="15" cy="15" r="15" fill="#10b981"/>
+      <text x="15" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">2</text>
+      <text x="40" y="20" font-family="Inter, sans-serif" font-size="14" fill="#065f46">Help protect user privacy globally</text>
+    </g>
+    
+    <g transform="translate(30, 90)">
+      <circle cx="15" cy="15" r="15" fill="#10b981"/>
+      <text x="15" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">3</text>
+      <text x="40" y="20" font-family="Inter, sans-serif" font-size="14" fill="#065f46">Leverage existing phone verification infrastructure</text>
+    </g>
+    
+    <g transform="translate(370, 90)">
+      <circle cx="15" cy="15" r="15" fill="#10b981"/>
+      <text x="15" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">4</text>
+      <text x="40" y="20" font-family="Inter, sans-serif" font-size="14" fill="#065f46">Join the decentralized identity ecosystem</text>
+    </g>
+  </g>
+  
+  <!-- Requirements -->
+  <rect x="150" y="450" width="500" height="35" rx="17" fill="#e0e7ff" stroke="#6366f1" stroke-width="1"/>
+  <text x="400" y="473" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#4c1d95">Requirements: Domain • SSL Certificate • Phone Verification API • Rust Server</text>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6366f1"/>
+    </marker>
+  </defs>
+</svg>
