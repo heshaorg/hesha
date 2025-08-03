@@ -99,8 +99,8 @@
                         <div class="benefit-text">Works Everywhere</div>
                     </div>
                     <div class="benefit">
-                        <div class="benefit-icon">⚡</div>
-                        <div class="benefit-text">Instant Verification</div>
+                        <div class="benefit-icon">✓</div>
+                        <div class="benefit-text">Verifiable Ownership</div>
                     </div>
                 </div>
             </div>
@@ -111,11 +111,30 @@
         <div class="container">
             <div class="section-header">
                 <h2>How It Works</h2>
-                <p class="section-subtitle">Four simple steps to permanent privacy</p>
+                <p class="section-subtitle">Five simple steps to permanent privacy</p>
+            </div>
+            
+            <!-- Step 0: Identity -->
+            <div class="step-section">
+                <div class="step-content">
+                    <div class="step-text">
+                        <div class="step-number-large">00</div>
+                        <h3>Get Your Hesha Identity</h3>
+                        <p>Download a Hesha-compatible wallet and generate your cryptographic identity. This creates your unique key pair that proves you control your attestations.</p>
+                        <ul class="check-list">
+                            <li>One-time identity generation</li>
+                            <li>Your keys never leave your device</li>
+                            <li>Backup your private key securely</li>
+                        </ul>
+                    </div>
+                    <div class="step-visual">
+                        <img src="assets/images/step-0-identity.svg" alt="Create identity" class="animate-on-scroll" />
+                    </div>
+                </div>
             </div>
             
             <!-- Step 1 -->
-            <div class="step-section">
+            <div class="step-section reverse">
                 <div class="step-content">
                     <div class="step-text">
                         <div class="step-number-large">01</div>
@@ -134,7 +153,7 @@
             </div>
             
             <!-- Step 2 -->
-            <div class="step-section reverse">
+            <div class="step-section">
                 <div class="step-content">
                     <div class="step-text">
                         <div class="step-number-large">02</div>
@@ -153,7 +172,7 @@
             </div>
             
             <!-- Step 3 -->
-            <div class="step-section">
+            <div class="step-section reverse">
                 <div class="step-content">
                     <div class="step-text">
                         <div class="step-number-large">03</div>
@@ -172,15 +191,15 @@
             </div>
             
             <!-- Step 4 -->
-            <div class="step-section reverse">
+            <div class="step-section">
                 <div class="step-content">
                     <div class="step-text">
                         <div class="step-number-large">04</div>
                         <h3>Share Everywhere</h3>
-                        <p>Use your proxy number everywhere you'd normally use your phone number. Services can verify it cryptographically without any API calls.</p>
+                        <p>Use your proxy number everywhere you'd normally use your phone number. Services verify it cryptographically using the issuer's public key.</p>
                         <ul class="check-list">
                             <li>Works with any service</li>
-                            <li>No spam or tracking</li>
+                            <li>No spam from random callers</li>
                             <li>Full control over your privacy</li>
                         </ul>
                     </div>
@@ -192,8 +211,8 @@
             
             <!-- Verification Process -->
             <div class="verification-section">
-                <h3>Services Verify Instantly, Offline</h3>
-                <p>No API calls, no tracking, no privacy leaks</p>
+                <h3>Services Verify Cryptographically</h3>
+                <p>Currently requires fetching issuer's public key, but designed for offline capability with caching</p>
                 <img src="assets/images/verification-flow.svg" alt="Verification flow" class="full-width-image animate-on-scroll" />
             </div>
         </div>
@@ -270,7 +289,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>What if the issuer goes offline?</h3>
-                    <p>No problem! Verification works completely offline. Once you have your attestation, services can verify it without contacting anyone.</p>
+                    <p>Currently, services need to fetch the issuer's public key at least once. We're working on implementing caching so verification can work offline after the first fetch.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Is this legal?</h3>
@@ -292,7 +311,7 @@
                 <div class="cta-badges">
                     <span class="badge">🔒 Privacy First</span>
                     <span class="badge">🌐 Decentralized</span>
-                    <span class="badge">⚡ Instant Verification</span>
+                    <span class="badge">🔑 Verifiable</span>
                     <span class="badge">🛡️ Cryptographically Secure</span>
                 </div>
             </div>
