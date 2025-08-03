@@ -1,0 +1,62 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#1f2937">Hesha Protocol Flow</text>
+  
+  <!-- User -->
+  <rect x="50" y="80" width="100" height="60" rx="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="100" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1f2937">User</text>
+  
+  <!-- Issuer -->
+  <rect x="250" y="80" width="100" height="60" rx="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="300" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1f2937">Issuer</text>
+  
+  <!-- Service -->
+  <rect x="450" y="80" width="100" height="60" rx="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="500" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#1f2937">Service</text>
+  
+  <!-- Step 1: Verify Phone -->
+  <path d="M150 110 L250 110" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow1)"/>
+  <text x="200" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#6366f1">1. Verify Phone</text>
+  <text x="200" y="130" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">(SMS/Call)</text>
+  
+  <!-- Step 2: Issue Attestation -->
+  <path d="M250 140 L150 140" stroke="#22d3ee" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+  <text x="200" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#22d3ee">2. Issue Attestation</text>
+  <text x="200" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">(JWT + Proxy)</text>
+  
+  <!-- Step 3: Share Proxy -->
+  <path d="M150 200 Q300 180 450 200" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow3)"/>
+  <text x="300" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#6366f1">3. Share Proxy Number</text>
+  <text x="300" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">(+990-XXX-XXX-XXX)</text>
+  
+  <!-- Step 4: Verify Offline -->
+  <rect x="425" y="250" width="150" height="80" rx="8" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="500" y="275" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#0c4a6e">4. Offline Verification</text>
+  <text x="500" y="295" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#075985">• Check signature</text>
+  <text x="500" y="310" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#075985">• Validate binding</text>
+  
+  <!-- Key Benefits -->
+  <rect x="50" y="280" width="300" height="50" rx="25" fill="url(#grad1)" opacity="0.1"/>
+  <text x="200" y="300" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#4f46e5">✓ Real number never exposed</text>
+  <text x="200" y="318" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#4f46e5">✓ One-time verification only</text>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6366f1"/>
+    </marker>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6366f1"/>
+    </marker>
+  </defs>
+</svg>

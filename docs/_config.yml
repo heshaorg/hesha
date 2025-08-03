@@ -1,0 +1,33 @@
+# GitHub Pages configuration for Hesha Protocol
+
+# Basic settings
+title: Hesha Protocol
+description: Privacy-preserving phone number proxies through cryptographic attestations
+baseurl: "" # Leave empty since we're using /docs folder
+url: "https://heshaorg.github.io/hesha"
+
+# Theme settings (using default GitHub Pages theme)
+theme: null # We're using custom HTML/CSS
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - mvp-implementation-plan.md
+  - binding-proof-technical-design.md
+  - internal-review-updated.md
+  - hesha-workplan-binding-proof.md
+
+# Include specific files
+include:
+  - _config.yml
+  - index.html
+  - documentation.html
+  - assets/
+
+# Markdown processing (for .md files rendered as HTML)
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

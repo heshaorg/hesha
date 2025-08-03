@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesha Protocol - Privacy-Preserving Phone Number Proxies</title>
+    <meta name="description" content="Hesha Protocol enables privacy-preserving phone number proxies through cryptographic attestations. Never share your real phone number again.">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/">Hesha Protocol</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="documentation.html">Documentation</a></li>
+                <li><a href="https://github.com/heshaorg/hesha" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="alpha-badge">ALPHA PREVIEW</div>
+                <h1>Your Phone Number.<br>Your Privacy.</h1>
+                <p class="hero-subtitle">
+                    Hesha Protocol lets you prove phone ownership without revealing your number. 
+                    Get cryptographically verifiable proxy numbers that preserve your privacy.
+                </p>
+                <div class="hero-actions">
+                    <a href="documentation.html" class="btn btn-primary">Read the Docs</a>
+                    <a href="https://github.com/heshaorg/hesha" class="btn btn-secondary">View on GitHub</a>
+                </div>
+                <div class="hero-code">
+                    <pre><code>Your real number: +1 (555) 123-4567
+Your proxy number: +990-123-456-789
+
+<span class="comment"># Services verify you own a real number</span>
+<span class="comment"># But they never see it</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="problem">
+        <div class="container">
+            <h2>The Problem</h2>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <div class="problem-icon">📱</div>
+                    <h3>Privacy Risk</h3>
+                    <p>Every app wants your phone number, creating a massive privacy risk as your real number spreads across countless databases.</p>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">🎯</div>
+                    <h3>Data Breaches</h3>
+                    <p>When services get hacked, your phone number is exposed, leading to spam, scams, and identity theft.</p>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">🔗</div>
+                    <h3>Cross-Service Tracking</h3>
+                    <p>The same phone number links your identity across every service, destroying anonymity and enabling surveillance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light" id="solution">
+        <div class="container">
+            <h2>The Solution</h2>
+            <div class="solution-content">
+                <div class="solution-text">
+                    <h3>Cryptographic Phone Number Proxies</h3>
+                    <p>
+                        Hesha introduces proxy phone numbers that are cryptographically tied to your real number 
+                        without revealing it. Services can verify you own a real phone number, but they never see it.
+                    </p>
+                    <ul class="feature-list">
+                        <li>One-time phone verification with trusted issuers</li>
+                        <li>Receive permanent, cryptographically signed attestations</li>
+                        <li>Share proxy numbers instead of your real number</li>
+                        <li>Services verify offline without contacting anyone</li>
+                    </ul>
+                </div>
+                <div class="solution-diagram">
+                    <img src="assets/images/protocol-flow.svg" alt="Hesha Protocol Flow" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>Your real phone number is never shared with services. Only cryptographic proofs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Decentralized</h3>
+                    <p>No central authority. Multiple issuers can participate in the ecosystem.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Offline Verification</h3>
+                    <p>Services verify attestations locally without API calls or network requests.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>User Control</h3>
+                    <p>Explicit consent for each use. You control when and how your proxy is shared.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Standard Crypto</h3>
+                    <p>Built on proven standards: Ed25519, SHA-256, and JWT.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Binding Proofs</h3>
+                    <p>Cryptographic binding prevents proxy number substitution attacks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light" id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Verify Your Phone</h3>
+                    <p>Prove ownership to a trusted issuer via SMS or call (one-time only)</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Attestation</h3>
+                    <p>Receive a cryptographically signed JWT attestation with your proxy number</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Share Proxy</h3>
+                    <p>Use your proxy number instead of your real number everywhere</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Offline Verification</h3>
+                    <p>Services verify the attestation cryptographically without any API calls</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="use-cases">
+        <div class="container">
+            <h2>Use Cases</h2>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <h3>🔒 Privacy Apps</h3>
+                    <p>Replace phone number requirements with verifiable proxies</p>
+                </div>
+                <div class="use-case">
+                    <h3>💸 Crypto Transactions</h3>
+                    <p>Share proxy numbers for P2P trades without doxxing</p>
+                </div>
+                <div class="use-case">
+                    <h3>🛍️ Marketplaces</h3>
+                    <p>Enable buyer-seller communication without phone exposure</p>
+                </div>
+                <div class="use-case">
+                    <h3>👥 Social Platforms</h3>
+                    <p>Prevent phone harvesting while maintaining verification</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-dark" id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Hesha Protocol is in alpha. We're looking for early adopters and contributors.</p>
+                <div class="cta-actions">
+                    <a href="documentation.html" class="btn btn-light">Read Documentation</a>
+                    <a href="https://github.com/heshaorg/hesha" class="btn btn-outline">Contribute on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Hesha Protocol</h4>
+                    <p>Privacy-preserving phone number proxies through cryptographic attestations.</p>
+                    <p class="footer-warning">⚠️ Alpha software - not production ready</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="hesha-protocol-whitepaper-unified.html">Whitepaper</a></li>
+                        <li><a href="hasha-protocol-specification.html">Protocol Spec</a></li>
+                        <li><a href="hasha-issuer-node-specification.html">Issuer Guide</a></li>
+                        <li><a href="hasha-wallet-technical-specification.html">Wallet Spec</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/heshaorg/hesha">GitHub</a></li>
+                        <li><a href="https://github.com/heshaorg/hesha/issues">Report Issues</a></li>
+                        <li><a href="https://github.com/heshaorg/hesha/blob/main/CONTRIBUTING.md">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hesha Protocol. Released under MIT License.</p>
+                <p>Made with ❤️ by privacy advocates worldwide</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
