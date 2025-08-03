@@ -49,19 +49,19 @@
                 <p>Welcome to the Hesha Protocol documentation. This guide covers everything you need to know about implementing and using Hesha for privacy-preserving phone number attestations.</p>
 
                 <div class="doc-cards">
-                    <a href="hesha-protocol-whitepaper-unified.html" class="doc-card">
+                    <a href="https://github.com/heshaorg/hesha/blob/main/docs/whitepaper.md" class="doc-card" target="_blank">
                         <h3>📄 Whitepaper</h3>
                         <p>Comprehensive technical overview with cryptographic design and security analysis</p>
                     </a>
-                    <a href="hasha-protocol-specification.html" class="doc-card">
+                    <a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-protocol-specification.md" class="doc-card" target="_blank">
                         <h3>🔧 Protocol Specification</h3>
                         <p>Detailed technical specification for implementing Hesha Protocol</p>
                     </a>
-                    <a href="hasha-issuer-node-specification.html" class="doc-card">
+                    <a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-issuer-node-specification.md" class="doc-card" target="_blank">
                         <h3>🏗️ Issuer Guide</h3>
                         <p>How to run an issuer node and verify phone numbers</p>
                     </a>
-                    <a href="hasha-wallet-technical-specification.html" class="doc-card">
+                    <a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-wallet-specification.md" class="doc-card" target="_blank">
                         <h3>📱 Wallet Specification</h3>
                         <p>Building wallets and client applications for Hesha</p>
                     </a>
@@ -87,7 +87,7 @@ cargo run -p issuer-node</code></pre>
 
                 <h3>Core Concepts</h3>
                 <ul>
-                    <li><strong>Proxy Numbers</strong>: Privacy-preserving phone numbers starting with +990 (global) or +[country]00 (local)</li>
+                    <li><strong>Proxy Numbers</strong>: Privacy-preserving phone numbers in the format +[country_code]00[digits] (e.g., +10012345678, +440012345678)</li>
                     <li><strong>Attestations</strong>: Cryptographically signed JWT tokens proving phone ownership</li>
                     <li><strong>Issuers</strong>: Services that verify real phone numbers and issue attestations</li>
                     <li><strong>Binding Proofs</strong>: Cryptographic mechanism preventing proxy number substitution</li>
@@ -107,7 +107,7 @@ cargo run -p issuer-node</code></pre>
 
                 <h3>Attestation Format</h3>
                 <pre><code class="language-json">{
-  "proxy_number": "+990XXXXXXXXX",
+  "proxy_number": "+10012345678",
   "phone_hash": "sha256:hex_hash",
   "user_pubkey": "base64_ed25519_pubkey",
   "binding_proof": "sig:base64_signature",
@@ -130,7 +130,7 @@ cargo run -p issuer-node</code></pre>
 use hesha_types::ProxyNumber;
 
 // Accept a proxy number and attestation
-let proxy = ProxyNumber::new("+990123456789")?;
+let proxy = ProxyNumber::new("+10012345678")?;
 let attestation_jwt = "eyJ..."; // User provides this
 
 // Verify the attestation

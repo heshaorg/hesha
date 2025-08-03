@@ -34,7 +34,7 @@
   <!-- Step 3: Share Proxy -->
   <path d="M150 200 Q300 180 450 200" stroke="#6366f1" stroke-width="2" fill="none" marker-end="url(#arrow3)"/>
   <text x="300" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#6366f1">3. Share Proxy Number</text>
-  <text x="300" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">(+990-XXX-XXX-XXX)</text>
+  <text x="300" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6b7280">(+1-001-234-5678)</text>
   
   <!-- Step 4: Verify Offline -->
   <rect x="425" y="250" width="150" height="80" rx="8" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="5,5"/>

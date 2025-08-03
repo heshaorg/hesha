@@ -113,11 +113,11 @@ Protection: Reduces scam call risks
 ```
 Country-Hopping Solution:
 - Home number: +1-555-444-5555 (US)
-- Global proxy: +990-006-7890
+- Proxy number: +1-004-445-555
 - Benefits:
-  • Works in any country
+  • Privacy maintained worldwide
   • No roaming concerns for verification
-  • Consistent identity across borders
+  • Consistent identity across services
 ```
 
 ### Immigration and Refugees
@@ -314,7 +314,7 @@ Smart Home Privacy:
 2. **Privacy**: Control who gets your real number
 3. **Safety**: Protect vulnerable populations
 4. **Business**: Separate personal and professional
-5. **Global**: Works across borders and cultures
+5. **Universal**: Works across borders and cultures
 
 ## Getting Started Checklist
 
