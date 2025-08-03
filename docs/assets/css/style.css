@@ -435,6 +435,82 @@ body {
     line-height: 1.5;
 }
 
+/* Proxy Comparison Section */
+.proxy-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+}
+
+.proxy-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.proxy-card.email {
+    border: 2px solid var(--secondary-color);
+}
+
+.proxy-card.phone {
+    border: 2px solid var(--primary-color);
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.proxy-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.proxy-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.proxy-card > p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.proxy-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.proxy-list li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.proxy-list strong {
+    color: var(--text-primary);
+}
+
+.proxy-benefit {
+    font-weight: 600;
+    color: var(--success-color);
+    margin: 0;
+}
+
+.proxy-message {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.proxy-message p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
 /* Solution Intro */
 .bg-gradient {
     background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
@@ -1427,6 +1503,20 @@ body {
     
     .stat-number {
         font-size: 3rem;
+    }
+    
+    .proxy-examples {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .proxy-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .proxy-message p {
+        font-size: 1.125rem;
+        padding: 0 1rem;
     }
     
     .solution-benefits {
