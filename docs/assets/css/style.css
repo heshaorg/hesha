@@ -339,7 +339,10 @@ body {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 1rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
 }
 
 .full-width-image {
