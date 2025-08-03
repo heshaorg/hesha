@@ -343,7 +343,10 @@
                     </div>
                 </div>
                 
-                <a href="documentation.html#integration" class="btn btn-primary btn-large">View Integration Docs</a>
+                <div class="early-adopter-cta">
+                    <a href="https://github.com/heshaorg/hesha/issues" class="btn btn-primary">Help Us Build Integration Tools</a>
+                    <p class="cta-note">Share your integration needs and use cases</p>
+                </div>
             </div>
         </div>
     </section>
@@ -363,13 +366,13 @@
                 <div class="issuer-grid">
                     <div class="issuer-card">
                         <div class="issuer-icon">💼</div>
-                        <h3>Business Opportunity</h3>
-                        <p>Charge fees for attestation services. Typical rates range from $0.50 to $5.00 per attestation, creating a sustainable revenue stream.</p>
+                        <h3>Potential Revenue</h3>
+                        <p>Issuers can charge for attestation services. Early partners will help define the business model and pricing structure.</p>
                     </div>
                     <div class="issuer-card">
                         <div class="issuer-icon">🔧</div>
-                        <h3>Easy Integration</h3>
-                        <p>Leverage your existing phone verification infrastructure. If you already verify phone numbers, becoming an issuer is straightforward.</p>
+                        <h3>Build on Your Infrastructure</h3>
+                        <p>If you already verify phone numbers, you can extend your service to issue privacy-preserving attestations.</p>
                     </div>
                     <div class="issuer-card">
                         <div class="issuer-icon">🌍</div>
@@ -379,30 +382,20 @@
                 </div>
                 
                 <div class="issuer-cta-section">
-                    <h3>Ready to Start?</h3>
-                    <p>Setting up an issuer node takes less than an hour</p>
-                    <div class="issuer-steps">
-                        <div class="issuer-step">
-                            <span class="step-num">1</span>
-                            <span>Deploy issuer node</span>
-                        </div>
-                        <div class="issuer-step">
-                            <span class="step-num">2</span>
-                            <span>Configure verification</span>
-                        </div>
-                        <div class="issuer-step">
-                            <span class="step-num">3</span>
-                            <span>Set your pricing</span>
-                        </div>
-                        <div class="issuer-step">
-                            <span class="step-num">4</span>
-                            <span>Start issuing</span>
-                        </div>
+                    <h3>Interested in Becoming an Issuer?</h3>
+                    <p>We're looking for early partners to help build the ecosystem</p>
+                    <div class="issuer-requirements">
+                        <h4>What You'll Need:</h4>
+                        <ul>
+                            <li>Existing phone verification infrastructure</li>
+                            <li>Technical team comfortable with Rust</li>
+                            <li>Commitment to user privacy</li>
+                        </ul>
                     </div>
                     <div class="cta-actions">
-                        <a href="https://github.com/heshaorg/hesha/blob/main/docs/hesha-issuer-node-specification.md" class="btn btn-primary btn-large" target="_blank">Read Issuer Guide</a>
-                        <a href="https://github.com/heshaorg/hesha/tree/main/nodes/issuer-node" class="btn btn-secondary btn-large" target="_blank">View Source Code</a>
+                        <a href="https://github.com/heshaorg/hesha/issues/new?title=Interested%20in%20becoming%20an%20issuer" class="btn btn-primary btn-large" target="_blank">Express Interest</a>
                     </div>
+                    <p class="disclaimer">Note: Issuer tooling is still in alpha development</p>
                 </div>
             </div>
         </div>
@@ -457,7 +450,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>What if the issuer goes offline?</h3>
-                    <p>Currently, services need to fetch the issuer's public key at least once. We're working on implementing caching so verification can work offline after the first fetch.</p>
+                    <p>Services need to fetch the issuer's public key to verify attestations. Future versions will support key caching for better resilience.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Is this legal?</h3>

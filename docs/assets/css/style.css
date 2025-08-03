@@ -335,10 +335,11 @@ body {
 
 /* Problem Section */
 .problem-visual {
-    margin-bottom: 3rem;
-    max-width: 800px;
+    margin-bottom: 4rem;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 1rem;
 }
 
 .full-width-image {
@@ -350,30 +351,45 @@ body {
 
 .problem-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .stat-card {
     text-align: center;
-    padding: 2rem;
+    padding: 3rem 2rem;
     background: white;
     border-radius: 16px;
     box-shadow: var(--shadow-md);
     transition: all 0.3s ease;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
 }
 
-.stat-card:nth-child(1) {
-    border-color: rgba(239, 68, 68, 0.1);
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: height 0.3s ease;
 }
 
-.stat-card:nth-child(2) {
-    border-color: rgba(245, 158, 11, 0.1);
+.stat-card:nth-child(1)::before {
+    background: var(--danger-color);
 }
 
-.stat-card:nth-child(3) {
-    border-color: rgba(99, 102, 241, 0.1);
+.stat-card:nth-child(2)::before {
+    background: var(--warning-color);
+}
+
+.stat-card:nth-child(3)::before {
+    background: var(--primary-color);
 }
 
 .stat-card:hover {
@@ -381,16 +397,39 @@ body {
     box-shadow: var(--shadow-xl);
 }
 
+.stat-card:hover::before {
+    height: 8px;
+}
+
 .stat-number {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--danger-color);
-    margin-bottom: 0.5rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-card:nth-child(1) .stat-number {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-card:nth-child(2) .stat-number {
+    background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .stat-label {
     color: var(--text-secondary);
     font-size: 1.125rem;
+    line-height: 1.5;
 }
 
 /* Solution Intro */
@@ -849,18 +888,24 @@ body {
 .issuer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 2.5rem;
     margin-bottom: 4rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .issuer-card {
     background: white;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 16px;
     box-shadow: var(--shadow-md);
     text-align: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .issuer-card:hover {
@@ -882,7 +927,9 @@ body {
 
 .issuer-card p {
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
+    flex-grow: 1;
+    margin: 0;
 }
 
 .issuer-cta-section {
@@ -902,6 +949,49 @@ body {
     font-size: 1.125rem;
     color: var(--text-secondary);
     margin-bottom: 2rem;
+}
+
+.issuer-requirements {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.issuer-requirements h4 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.issuer-requirements ul {
+    list-style: none;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.issuer-requirements li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.issuer-requirements li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.disclaimer {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 1rem;
 }
 
 .issuer-steps {
@@ -1229,11 +1319,16 @@ body {
     
     .problem-stats {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+        padding: 0;
     }
     
     .stat-card {
-        padding: 1.5rem;
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 3rem;
     }
     
     .solution-benefits {
@@ -1319,7 +1414,11 @@ body {
     
     .issuer-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+    }
+    
+    .issuer-card {
+        padding: 2rem 1.5rem;
     }
     
     .issuer-cta-section {
