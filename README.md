@@ -50,7 +50,7 @@ graph LR
 
 ### Core Components
 
-- **Protocol Specification** ([docs](docs/hasha-protocol-specification.md)) - The core protocol definition
+- **Protocol Specification** ([docs](docs/hesha-protocol-specification.md)) - The core protocol definition
 - **Issuer Nodes** - Services that verify phone ownership and issue attestations
 - **Wallets** - Apps that store attestations and handle verification
 - **Service Libraries** - SDKs for accepting proxy numbers
@@ -66,10 +66,10 @@ graph LR
 ## Documentation
 
 - 📄 [Whitepaper](docs/whitepaper.md) - Academic paper with security proofs
-- 🔧 [Protocol Specification](docs/hasha-protocol-specification.md) - Technical details
+- 🔧 [Protocol Specification](docs/hesha-protocol-specification.md) - Technical details
 - 🖼️ [Sequence Diagrams](docs/sequence-diagrams.md) - Visual protocol flows
-- 🏗️ [Issuer Specification](docs/hasha-issuer-node-specification.md) - Running an issuer
-- 📱 [Wallet Specification](docs/hasha-wallet-technical-specification.md) - Building a wallet
+- 🏗️ [Issuer Specification](docs/hesha-issuer-node-specification.md) - Running an issuer
+- 📱 [Wallet Specification](docs/hesha-wallet-technical-specification.md) - Building a wallet
 
 ## Project Structure
 
