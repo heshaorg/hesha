@@ -144,6 +144,35 @@ Display information about the Hesha Protocol, including:
 - Links to documentation
 ")]
     Info,
+    
+    /// Setup a new Hesha issuer with interactive configuration
+    #[command(name = "setup")]
+    #[command(long_about = "
+Initialize a new Hesha issuer node with proper configuration.
+
+This command will:
+1. Collect issuer identity information (name, domain, contact)
+2. Generate Ed25519 keypairs for signing attestations
+3. Configure database and server settings
+4. Create all necessary directories and files
+5. Generate the public key endpoint JSON
+
+The setup process emphasizes security:
+- Private keys are saved with restricted permissions
+- You'll be prompted to backup your private key
+- Configuration is validated before saving
+
+Examples:
+  # Interactive setup (recommended)
+  hesha setup
+  
+  # Setup in specific directory
+  hesha setup -o /path/to/issuer
+  
+  # Non-interactive setup with defaults
+  hesha setup --non-interactive
+")]
+    Setup(commands::setup_issuer::SetupIssuerCmd),
 }
 
 #[tokio::main]
@@ -170,6 +199,9 @@ async fn main() -> anyhow::Result<()> {
         }
         Commands::Info => {
             commands::info::execute()?;
+        }
+        Commands::Setup(cmd) => {
+            cmd.execute()?;
         }
     }
     
