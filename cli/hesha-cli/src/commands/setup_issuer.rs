@@ -77,6 +77,8 @@ impl SetupIssuerCmd {
                 .validate_with(|input: &String| {
                     if input.contains("://") {
                         Err("Please enter domain only, without protocol")
+                    } else if input == "localhost" || input.starts_with("localhost:") {
+                        Ok(()) // Allow localhost for development
                     } else if !input.contains('.') {
                         Err("Invalid domain format")
                     } else {
