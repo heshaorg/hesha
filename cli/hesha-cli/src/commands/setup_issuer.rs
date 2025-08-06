@@ -10,8 +10,14 @@ use std::path::PathBuf;
 #[derive(Debug, Args)]
 pub struct SetupIssuerCmd {
     /// Output directory for configuration and keys.
-    #[arg(short, long, default_value = ".")]
-    output_dir: PathBuf,
+    /// If not specified, defaults to ~/.hesha/issuer/<name>
+    #[arg(short, long)]
+    output_dir: Option<PathBuf>,
+    
+    /// Name for this issuer configuration (used for directory naming).
+    /// Defaults to 'default'
+    #[arg(short, long, default_value = "default")]
+    name: String,
     
     /// Skip interactive prompts and use defaults.
     #[arg(long)]
@@ -33,6 +39,15 @@ impl SetupIssuerCmd {
         
         output::info("Welcome to Hesha Protocol Setup");
         println!("Setting up your issuer node for the first time.\n");
+        
+        // Determine output directory
+        let output_dir = self.output_dir.unwrap_or_else(|| {
+            let home = dirs::home_dir().expect("Could not find home directory");
+            home.join(".hesha").join("issuer").join(&self.name)
+        });
+        
+        // Show where we're saving
+        println!("Configuration will be saved to: {}\n", output_dir.display());
         
         let theme = ColorfulTheme::default();
         
@@ -121,10 +136,10 @@ impl SetupIssuerCmd {
         
         // Save configuration
         output::info("Saving configuration and keys...");
-        setup.save(&self.output_dir)?;
+        setup.save(&output_dir)?;
         
-        output::success(&format!("✅ Configuration saved to {}/config/issuer.toml", self.output_dir.display()));
-        output::success(&format!("✅ Keys saved to {}/keys/", self.output_dir.display()));
+        output::success(&format!("✅ Configuration saved to {}/config/issuer.toml", output_dir.display()));
+        output::success(&format!("✅ Keys saved to {}/keys/", output_dir.display()));
         
         // Display public key for easy copying
         println!("\n{}", "─".repeat(60));
@@ -142,7 +157,7 @@ impl SetupIssuerCmd {
     │   Your private key is stored at:       │
     │   {}/keys/private.key                   │
     └─────────────────────────────────────────┘
-        "#, self.output_dir.display());
+        "#, output_dir.display());
         println!("{}", "═".repeat(60));
         
         println!("\n📋 Backup Checklist:");
@@ -165,7 +180,7 @@ impl SetupIssuerCmd {
         
         println!("1️⃣  Deploy your public key:");
         println!("    📍 URL: https://{}/.well-known/hesha/pubkey.json", setup.config.identity.trust_domain);
-        println!("    📄 File: {}/config/public-key-endpoint.json\n", self.output_dir.display());
+        println!("    📄 File: {}/config/public-key-endpoint.json\n", output_dir.display());
         
         println!("2️⃣  Configure DNS:");
         println!("    🌐 Point {} → your server IP\n", setup.config.identity.trust_domain);
