@@ -173,6 +173,37 @@ Examples:
   hesha setup --non-interactive
 ")]
     Setup(commands::setup_issuer::SetupIssuerCmd),
+    
+    /// Start the Hesha issuer node
+    #[command(name = "start")]
+    #[command(long_about = "
+Start the Hesha issuer node using a configuration created with 'hesha setup'.
+
+Examples:
+  # Start with default configuration
+  hesha start
+  
+  # Start with named configuration
+  hesha start -n myissuer
+  
+  # Start in background (daemon mode)
+  hesha start --daemon
+")]
+    Start(commands::start::StartCmd),
+    
+    /// Stop the Hesha issuer node
+    #[command(name = "stop")]
+    #[command(long_about = "
+Stop a running Hesha issuer node.
+
+Examples:
+  # Stop default issuer
+  hesha stop
+  
+  # Stop named issuer
+  hesha stop -n myissuer
+")]
+    Stop(commands::stop::StopCmd),
 }
 
 #[tokio::main]
@@ -201,6 +232,12 @@ async fn main() -> anyhow::Result<()> {
             commands::info::execute()?;
         }
         Commands::Setup(cmd) => {
+            cmd.execute()?;
+        }
+        Commands::Start(cmd) => {
+            cmd.execute()?;
+        }
+        Commands::Stop(cmd) => {
             cmd.execute()?;
         }
     }

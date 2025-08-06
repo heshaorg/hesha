@@ -135,9 +135,7 @@ impl IssuerSetup {
         
         // Save private key as base64 (with restricted permissions)
         let private_key_path = keys_dir.join("private.key");
-        let private_key_base64 = general_purpose::STANDARD.encode(
-            self.keypair.private.as_bytes()
-        );
+        let private_key_base64 = self.keypair.private.to_base64();
         fs::write(&private_key_path, private_key_base64)
             .map_err(|e| HeshaError::ConfigError(format!("Failed to write private key: {}", e)))?;
         
@@ -152,9 +150,7 @@ impl IssuerSetup {
         
         // Save public key as base64
         let public_key_path = keys_dir.join("public.key");
-        let public_key_base64 = general_purpose::STANDARD.encode(
-            self.keypair.public.as_bytes()
-        );
+        let public_key_base64 = self.keypair.public.to_base64();
         fs::write(&public_key_path, public_key_base64)
             .map_err(|e| HeshaError::ConfigError(format!("Failed to write public key: {}", e)))?;
         
