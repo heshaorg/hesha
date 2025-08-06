@@ -183,7 +183,18 @@ impl IssuerSetup {
 
 /// Validate domain format (basic validation).
 fn is_valid_domain(domain: &str) -> bool {
-    // Basic domain validation
+    // Allow localhost for development
+    if domain == "localhost" || domain.starts_with("localhost:") {
+        return true;
+    }
+    
+    // Allow IP addresses for development (e.g., 127.0.0.1:3000)
+    if domain.parse::<std::net::IpAddr>().is_ok() || 
+       domain.split(':').next().map(|ip| ip.parse::<std::net::IpAddr>().is_ok()).unwrap_or(false) {
+        return true;
+    }
+    
+    // Basic domain validation for production domains
     let parts: Vec<&str> = domain.split('.').collect();
     parts.len() >= 2 && 
     parts.iter().all(|part| !part.is_empty() && part.chars().all(|c| c.is_alphanumeric() || c == '-'))
