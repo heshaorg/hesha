@@ -188,7 +188,8 @@ impl SetupIssuerCmd {
         println!("    🌐 Point {} → your server IP\n", setup.config.identity.trust_domain);
         
         println!("3️⃣  Start your issuer node:");
-        println!("    💻 cargo run --bin hesha-issuer-node\n");
+        println!("    💻 HESHA_CONFIG_DIR={} cargo run --bin hesha-issuer-node", output_dir.display());
+        println!("    Or: CONFIG_PATH={}/config/issuer.toml cargo run --bin hesha-issuer-node\n", output_dir.display());
         
         println!("4️⃣  Test everything:");
         println!("    🧪 hesha verify --help\n");

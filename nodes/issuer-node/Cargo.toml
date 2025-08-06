@@ -27,6 +27,7 @@ tracing-subscriber = { workspace = true }
 uuid = { version = "1.6", features = ["v4", "serde"] }
 chrono = { workspace = true }
 anyhow = { workspace = true }
+toml = { workspace = true }
 
 [dev-dependencies]
 hesha-client = { path = "../../crates/hesha-client" }

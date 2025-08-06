@@ -2,6 +2,7 @@
 
 mod api;
 mod config;
+mod config_loader;
 mod state;
 
 use crate::config::Config;
@@ -26,8 +27,8 @@ async fn main() -> anyhow::Result<()> {
         .with(tracing_subscriber::fmt::layer())
         .init();
     
-    // Load configuration (from environment or defaults)
-    let config = Config::default();
+    // Load configuration from file or environment
+    let config = Config::load()?;
     
     // Generate or load issuer key
     let issuer_key = if let Some(key_path) = &config.private_key_path {
