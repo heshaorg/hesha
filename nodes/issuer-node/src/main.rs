@@ -2,6 +2,7 @@
 
 mod api;
 mod config;
+mod config_loader;
 mod state;
 
 use crate::config::Config;
@@ -26,8 +27,8 @@ async fn main() -> anyhow::Result<()> {
         .with(tracing_subscriber::fmt::layer())
         .init();
     
-    // Load configuration (from environment or defaults)
-    let config = Config::default();
+    // Load configuration from file or environment
+    let config = Config::load()?;
     
     // Generate or load issuer key
     let issuer_key = if let Some(key_path) = &config.private_key_path {
@@ -50,7 +51,6 @@ async fn main() -> anyhow::Result<()> {
     // Build router
     let app = Router::new()
         .route("/attest", post(api::attest::attest))
-        .route("/attest/simple", post(api::attest_simple::attest_simple))
         .route("/.well-known/hesha/pubkey.json", get(api::pubkey::pubkey))
         .layer(TraceLayer::new_for_http())
         .with_state(state);
@@ -59,8 +59,7 @@ async fn main() -> anyhow::Result<()> {
     let addr = config.bind_address;
     tracing::info!("Issuer node listening on {}", addr);
     tracing::info!("Endpoints:");
-    tracing::info!("  POST   /attest                     - Issue attestation (with user pubkey)");
-    tracing::info!("  POST   /attest/simple              - Issue attestation (with verification code)");
+    tracing::info!("  POST   /attest                     - Issue attestation");
     tracing::info!("  GET    /.well-known/hesha/pubkey.json - Public key discovery");
     
     let listener = tokio::net::TcpListener::bind(&addr).await?;
@@ -100,7 +99,7 @@ mod tests {
             "version": "0.1.0-alpha",
             "phone_number": phone.to_string(),
             "user_pubkey": user_key.public.to_base64(),
-            "scope": "990",
+            "scope": "234",
         });
         
         let response = client

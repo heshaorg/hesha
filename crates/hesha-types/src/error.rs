@@ -48,6 +48,10 @@ pub enum HeshaError {
     /// Invalid binding proof.
     #[error("Invalid binding proof")]
     InvalidBindingProof,
+    
+    /// Configuration error.
+    #[error("Configuration error: {0}")]
+    ConfigError(String),
 }
 
 impl From<serde_json::Error> for HeshaError {

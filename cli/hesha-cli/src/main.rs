@@ -47,14 +47,17 @@ The issuer will verify your phone number ownership (method varies by issuer)
 and provide a signed JWT attestation that binds a proxy number to your public key.
 
 Examples:
-  # Request global proxy number (+990...)
-  hesha attest -i https://issuer.example.com -p +1234567890
-  
-  # Request US local proxy number (+1...)
+  # Request US proxy number (+100...)
   hesha attest -i https://issuer.example.com -p +1234567890 -s 1
+  
+  # Request UK proxy number (+4400...)  
+  hesha attest -i https://issuer.example.com -p +447700123456 -s 44
   
   # Save attestation to file
   hesha attest -i https://issuer.example.com -p +1234567890 -o attestation.jwt
+  
+  # Request with custom validity (7 days)
+  hesha attest -i https://issuer.example.com -p +1234567890 -s 1 -d 7
 ")]
     Attest {
         /// Issuer URL (e.g., https://issuer.example.com)
@@ -65,8 +68,8 @@ Examples:
         #[arg(short, long, value_name = "PHONE")]
         phone: String,
         
-        /// Scope - calling code for proxy number (default: 990 for global)
-        #[arg(short, long, value_name = "CODE", default_value = "990")]
+        /// Scope - country calling code for proxy number (e.g., 1, 44, 234)
+        #[arg(short, long, value_name = "CODE")]
         scope: String,
         
         /// Private key file (or use HASHA_PRIVATE_KEY env)
@@ -76,6 +79,10 @@ Examples:
         /// Output file for attestation
         #[arg(short, long, value_name = "FILE")]
         output: Option<String>,
+        
+        /// Validity period in days (optional, uses issuer default if not specified)
+        #[arg(short = 'd', long, value_name = "DAYS", value_parser = clap::value_parser!(i64).range(1..=730))]
+        validity_days: Option<i64>,
     },
     
     /// Verify an attestation's cryptographic validity
@@ -144,6 +151,66 @@ Display information about the Hesha Protocol, including:
 - Links to documentation
 ")]
     Info,
+    
+    /// Setup a new Hesha issuer with interactive configuration
+    #[command(name = "setup")]
+    #[command(long_about = "
+Initialize a new Hesha issuer node with proper configuration.
+
+This command will:
+1. Collect issuer identity information (name, domain, contact)
+2. Generate Ed25519 keypairs for signing attestations
+3. Configure database and server settings
+4. Create all necessary directories and files
+5. Generate the public key endpoint JSON
+
+The setup process emphasizes security:
+- Private keys are saved with restricted permissions
+- You'll be prompted to backup your private key
+- Configuration is validated before saving
+
+Examples:
+  # Interactive setup (recommended)
+  hesha setup
+  
+  # Setup in specific directory
+  hesha setup -o /path/to/issuer
+  
+  # Non-interactive setup with defaults
+  hesha setup --non-interactive
+")]
+    Setup(commands::setup_issuer::SetupIssuerCmd),
+    
+    /// Start the Hesha issuer node
+    #[command(name = "start")]
+    #[command(long_about = "
+Start the Hesha issuer node using a configuration created with 'hesha setup'.
+
+Examples:
+  # Start with default configuration
+  hesha start
+  
+  # Start with named configuration
+  hesha start -n myissuer
+  
+  # Start in background (daemon mode)
+  hesha start --daemon
+")]
+    Start(commands::start::StartCmd),
+    
+    /// Stop the Hesha issuer node
+    #[command(name = "stop")]
+    #[command(long_about = "
+Stop a running Hesha issuer node.
+
+Examples:
+  # Stop default issuer
+  hesha stop
+  
+  # Stop named issuer
+  hesha stop -n myissuer
+")]
+    Stop(commands::stop::StopCmd),
 }
 
 #[tokio::main]
@@ -159,8 +226,8 @@ async fn main() -> anyhow::Result<()> {
         Commands::Keygen { format } => {
             commands::keygen::execute(&format)?;
         }
-        Commands::Attest { issuer, phone, scope, key, output } => {
-            commands::attest::execute(&issuer, &phone, &scope, key.as_deref(), output.as_deref()).await?;
+        Commands::Attest { issuer, phone, scope, key, output, validity_days } => {
+            commands::attest::execute(&issuer, &phone, &scope, key.as_deref(), output.as_deref(), validity_days).await?;
         }
         Commands::Verify { attestation, phone } => {
             commands::verify::execute(&attestation, phone.as_deref()).await?;
@@ -170,6 +237,15 @@ async fn main() -> anyhow::Result<()> {
         }
         Commands::Info => {
             commands::info::execute()?;
+        }
+        Commands::Setup(cmd) => {
+            cmd.execute()?;
+        }
+        Commands::Start(cmd) => {
+            cmd.execute()?;
+        }
+        Commands::Stop(cmd) => {
+            cmd.execute()?;
         }
     }
     

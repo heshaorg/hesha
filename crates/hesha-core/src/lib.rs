@@ -19,6 +19,7 @@
 
 pub mod attestation;
 pub mod generator;
+pub mod issuer_setup;
 pub mod verification;
 
 // Re-export main functionality
@@ -27,6 +28,7 @@ pub use attestation::{
     parse_attestation_jwt, validate_attestation, AttestationBuilder,
 };
 pub use generator::{generate_proxy_number, ProxyGenerationInput};
+pub use issuer_setup::{IssuerSetup, IssuerSetupBuilder};
 pub use verification::{
     discover_issuer_key, verify_attestation, verify_attestation_with_key, IssuerKeyCache,
 };

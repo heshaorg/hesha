@@ -112,14 +112,14 @@ mod tests {
             phone_number: "+1234567890".to_string(),
             user_pubkey: "MCowBQYDK2VwAyEAa7bsa2eI7T6w9P6KVJdLvmSGq2uPmTqz2R0RBAl6R2E".to_string(),
             issuer_domain: "example.com".to_string(),
-            scope: "990".to_string(),
+            scope: "234".to_string(),
             nonce: "a1b2c3d4e5f67890a1b2c3d4e5f67890".to_string(),
         };
         
         let proxy = generate(&input).unwrap();
         println!("Generated proxy: {}", proxy.as_str());
-        assert!(proxy.as_str().starts_with("+99000"));
-        assert_eq!(proxy.as_str().len(), 15); // +990 + 00 + 10 digits = 15
+        assert!(proxy.as_str().starts_with("+23400"));
+        assert_eq!(proxy.as_str().len(), 15); // +234 + 00 + 9 digits = 15
     }
     
     #[test]

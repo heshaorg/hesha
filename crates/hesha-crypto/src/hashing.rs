@@ -202,7 +202,7 @@ mod tests {
         let issuer_key = generate_keypair().unwrap();
         let phone_hash = "sha256:c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646";
         let user_pubkey = "MCowBQYDK2VwAyEAa7bsa2eI7T6w9P6KVJdLvmSGq2uPmTqz2R0RBAl6R2E";
-        let proxy_number = "+99012345678901";
+        let proxy_number = "+23400123456789";
         let iat = 1720000000i64;
         
         // Create signature

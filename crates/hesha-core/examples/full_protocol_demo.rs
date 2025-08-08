@@ -26,7 +26,7 @@ async fn main() -> anyhow::Result<()> {
         phone_number: phone.to_string(),
         user_pubkey: user_key.public.to_base64(),
         issuer_domain: "issuer.example.com".to_string(),
-        scope: "990".to_string(),
+        scope: "234".to_string(),
         nonce: generate_hex_nonce(),
     };
     let proxy = generate_proxy_number(&generation_input)?;

@@ -106,8 +106,7 @@ impl<'de> Deserialize<'de> for PhoneNumber {
 /// A validated proxy phone number.
 /// 
 /// # Format
-/// - Global: +990XXXXXXXXXX (12 digits after +990)
-/// - Local: +{country_code}00XXXXXXXXX
+/// - +{country_code}00XXXXXXXXX (country code followed by 00 and digits)
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ProxyNumber(String);
 
@@ -135,12 +134,9 @@ impl ProxyNumber {
         
         // Check if it's a valid proxy format
         if cleaned.starts_with("+990") {
-            // Global proxy number
-            if cleaned.len() != 15 { // +990 + 11 digits (E.164 compliant)
-                return Err(HeshaError::InvalidProxyNumber(
-                    "Global proxy numbers must be +990 followed by 11 digits".to_string()
-                ));
-            }
+            return Err(HeshaError::InvalidProxyNumber(
+                "Global proxy numbers (+990) are no longer supported".to_string()
+            ));
         } else {
             // Local proxy number - must have '00' after country code
             let has_double_zero = digits.contains("00");
@@ -155,12 +151,6 @@ impl ProxyNumber {
         Ok(ProxyNumber(cleaned))
     }
     
-    /// Create a global proxy number.
-    pub fn new_global(number_part: &str) -> HeshaResult<Self> {
-        let full = format!("+990{}", number_part);
-        Self::new(full)
-    }
-    
     /// Create a local proxy number.
     pub fn new_local(country_code: &str, number_part: &str) -> HeshaResult<Self> {
         let full = format!("+{}00{}", country_code, number_part);
@@ -172,10 +162,6 @@ impl ProxyNumber {
         &self.0
     }
     
-    /// Check if this is a global proxy number.
-    pub fn is_global(&self) -> bool {
-        self.0.starts_with("+990")
-    }
 }
 
 impl fmt::Display for ProxyNumber {
@@ -259,15 +245,14 @@ mod tests {
     
     #[test]
     fn test_proxy_number_validation() {
-        // Valid global proxy
-        assert!(ProxyNumber::new("+99012345678901").is_ok());
-        
         // Valid local proxy
         assert!(ProxyNumber::new("+12001234567890").is_ok());
         assert!(ProxyNumber::new("+442001234567890").is_ok());
+        assert!(ProxyNumber::new("+2340012345678").is_ok());
         
         // Invalid proxy numbers
-        assert!(ProxyNumber::new("+990123").is_err()); // Wrong length
+        assert!(ProxyNumber::new("+99012345678901").is_err()); // 990 not supported
+        assert!(ProxyNumber::new("+990123").is_err()); // 990 not supported
         assert!(ProxyNumber::new("+123456789").is_err()); // No 00 marker
     }
     

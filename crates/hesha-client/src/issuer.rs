@@ -9,13 +9,17 @@ use std::time::Duration;
 /// Request for attestation.
 #[derive(Debug, Serialize)]
 pub struct AttestationRequest {
+    /// Protocol version.
+    pub version: String,
     /// Phone number (already verified by issuer).
     pub phone_number: String,
     /// User's public key.
     pub user_pubkey: String,
-    /// Optional scope for proxy number generation (e.g., "990" for global, "1" for US).
+    /// Scope for proxy number generation (e.g., "1" for US, "44" for UK, "234" for Nigeria).
+    pub scope: String,
+    /// Optional validity period in days (defaults to issuer config).
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub scope: Option<String>,
+    pub validity_days: Option<i64>,
 }
 
 /// Response containing attestation.
@@ -68,28 +72,25 @@ impl IssuerClient {
     }
     
     /// Request attestation for a verified phone number.
+    /// 
+    /// Note: scope is now required by the protocol. Use the phone's country code
+    /// or specify a different scope for the proxy number.
     pub async fn request_attestation(
         &self,
         phone_number: &PhoneNumber,
         user_pubkey: &PublicKey,
-    ) -> ClientResult<AttestationResponse> {
-        self.request_attestation_with_scope(phone_number, user_pubkey, None).await
-    }
-    
-    /// Request attestation with optional scope for proxy number generation.
-    pub async fn request_attestation_with_scope(
-        &self,
-        phone_number: &PhoneNumber,
-        user_pubkey: &PublicKey,
-        scope: Option<&str>,
+        scope: &str,
+        validity_days: Option<i64>,
     ) -> ClientResult<AttestationResponse> {
         let url = self.base_url.join("attest")
             .map_err(|e| ClientError::InvalidUrl(e.to_string()))?;
         
         let request = AttestationRequest {
+            version: "0.1.0-alpha".to_string(),
             phone_number: phone_number.to_string(),
             user_pubkey: user_pubkey.to_base64(),
-            scope: scope.map(|s| s.to_string()),
+            scope: scope.to_string(),
+            validity_days,
         };
         
         let response = self.client

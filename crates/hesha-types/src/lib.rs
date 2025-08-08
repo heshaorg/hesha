@@ -16,6 +16,7 @@
 pub mod attestation;
 pub mod crypto;
 pub mod error;
+pub mod issuer_config;
 pub mod phone;
 
 // Re-export commonly used types
@@ -26,6 +27,7 @@ pub use crypto::{
     BindingProof, KeyPair, Nonce, PrivateKey, PublicKey, Signature,
 };
 pub use error::{HeshaError, HeshaResult};
+pub use issuer_config::{IssuerConfig, IssuerIdentity};
 pub use phone::{PhoneHash, PhoneNumber, ProxyNumber};
 
 #[cfg(test)]

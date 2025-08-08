@@ -13,7 +13,7 @@ pub struct ProxyGenerationInput {
     pub user_pubkey: String,
     /// Issuer's domain (e.g., "example.com")
     pub issuer_domain: String,
-    /// Scope: calling code (1-4 digits, e.g., "1", "44", "1264", "990")
+    /// Scope: country calling code (1-4 digits, e.g., "1", "44", "234", "1264")
     pub scope: String,
     /// 128-bit random nonce (lowercase hex, 32 chars)
     pub nonce: String,
