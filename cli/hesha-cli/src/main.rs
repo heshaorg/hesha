@@ -55,6 +55,9 @@ Examples:
   
   # Save attestation to file
   hesha attest -i https://issuer.example.com -p +1234567890 -o attestation.jwt
+  
+  # Request with custom validity (7 days)
+  hesha attest -i https://issuer.example.com -p +1234567890 -s 1 -d 7
 ")]
     Attest {
         /// Issuer URL (e.g., https://issuer.example.com)
@@ -76,6 +79,10 @@ Examples:
         /// Output file for attestation
         #[arg(short, long, value_name = "FILE")]
         output: Option<String>,
+        
+        /// Validity period in days (optional, uses issuer default if not specified)
+        #[arg(short = 'd', long, value_name = "DAYS", value_parser = clap::value_parser!(i64).range(1..=730))]
+        validity_days: Option<i64>,
     },
     
     /// Verify an attestation's cryptographic validity
@@ -219,8 +226,8 @@ async fn main() -> anyhow::Result<()> {
         Commands::Keygen { format } => {
             commands::keygen::execute(&format)?;
         }
-        Commands::Attest { issuer, phone, scope, key, output } => {
-            commands::attest::execute(&issuer, &phone, &scope, key.as_deref(), output.as_deref()).await?;
+        Commands::Attest { issuer, phone, scope, key, output, validity_days } => {
+            commands::attest::execute(&issuer, &phone, &scope, key.as_deref(), output.as_deref(), validity_days).await?;
         }
         Commands::Verify { attestation, phone } => {
             commands::verify::execute(&attestation, phone.as_deref()).await?;

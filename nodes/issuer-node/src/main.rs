@@ -51,7 +51,6 @@ async fn main() -> anyhow::Result<()> {
     // Build router
     let app = Router::new()
         .route("/attest", post(api::attest::attest))
-        .route("/attest/simple", post(api::attest_simple::attest_simple))
         .route("/.well-known/hesha/pubkey.json", get(api::pubkey::pubkey))
         .layer(TraceLayer::new_for_http())
         .with_state(state);
@@ -60,8 +59,7 @@ async fn main() -> anyhow::Result<()> {
     let addr = config.bind_address;
     tracing::info!("Issuer node listening on {}", addr);
     tracing::info!("Endpoints:");
-    tracing::info!("  POST   /attest                     - Issue attestation (with user pubkey)");
-    tracing::info!("  POST   /attest/simple              - Issue attestation (with verification code)");
+    tracing::info!("  POST   /attest                     - Issue attestation");
     tracing::info!("  GET    /.well-known/hesha/pubkey.json - Public key discovery");
     
     let listener = tokio::net::TcpListener::bind(&addr).await?;

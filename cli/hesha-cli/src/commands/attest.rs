@@ -13,6 +13,7 @@ pub async fn execute(
     scope: &str,
     key_path: Option<&str>,
     output: Option<&str>,
+    validity_days: Option<i64>,
 ) -> anyhow::Result<()> {
     output::info("Requesting attestation...");
     
@@ -25,9 +26,9 @@ pub async fn execute(
     // Create client
     let client = IssuerClient::new(issuer)?;
     
-    // Request attestation with specified scope
+    // Request attestation with specified scope and optional validity
     let response = client
-        .request_attestation_with_scope(&phone_number, &keypair.public, Some(scope))
+        .request_attestation(&phone_number, &keypair.public, scope, validity_days)
         .await?;
     
     output::success("Attestation received!");

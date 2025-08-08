@@ -111,6 +111,29 @@ impl<'a> AttestationBuilder<'a> {
             nonce: generate_nonce(),  // Not included in JWT per spec
         })
     }
+    
+    /// Build the attestation and encode as JWT.
+    pub fn build_jwt(self) -> HeshaResult<String> {
+        // Store reference to issuer key before consuming self
+        let issuer_key = self.issuer_private_key;
+        let attestation = self.build()?;
+        
+        // Create binding signature for JWT
+        let binding_signature = create_binding_signature(
+            &format!("sha256:{}", attestation.phone_hash.to_hex()),
+            &attestation.user_pubkey.to_base64(),
+            attestation.proxy_number.as_str(),
+            attestation.iat.timestamp(),
+            issuer_key,
+        )?;
+        
+        // Convert to JWT claims with binding signature
+        let mut claims = Claims::from_attestation(&attestation);
+        claims.binding_proof = binding_signature;
+        
+        // Encode with our Ed25519 JWT implementation
+        encode_jwt(&claims, issuer_key)
+    }
 }
 
 /// Create a signed JWT attestation.
@@ -126,30 +149,13 @@ pub fn create_attestation(
     proxy_number: &ProxyNumber,
     user_pubkey: &PublicKey,
 ) -> HeshaResult<String> {
-    // Build the attestation
-    let attestation = AttestationBuilder::new(
+    AttestationBuilder::new(
         issuer_domain.to_string(),
         issuer_private_key,
         phone_number.clone(),
         proxy_number.clone(),
         user_pubkey.clone(),
-    ).build()?;
-    
-    // Create binding signature for JWT
-    let binding_signature = create_binding_signature(
-        &format!("sha256:{}", attestation.phone_hash.to_hex()),
-        &attestation.user_pubkey.to_base64(),
-        attestation.proxy_number.as_str(),
-        attestation.iat.timestamp(),
-        issuer_private_key,
-    )?;
-    
-    // Convert to JWT claims with binding signature
-    let mut claims = Claims::from_attestation(&attestation);
-    claims.binding_proof = binding_signature;
-    
-    // Encode with our Ed25519 JWT implementation
-    encode_jwt(&claims, issuer_private_key)
+    ).build_jwt()
 }
 
 /// Create a signed JWT attestation with a trust domain.
@@ -164,8 +170,7 @@ pub fn create_attestation_with_trust_domain(
     proxy_number: &ProxyNumber,
     user_pubkey: &PublicKey,
 ) -> HeshaResult<String> {
-    // Build the attestation
-    let attestation = AttestationBuilder::new(
+    AttestationBuilder::new(
         issuer_domain.to_string(),
         issuer_private_key,
         phone_number.clone(),
@@ -173,23 +178,7 @@ pub fn create_attestation_with_trust_domain(
         user_pubkey.clone(),
     )
     .trust_domain(trust_domain.to_string())
-    .build()?;
-    
-    // Create binding signature for JWT
-    let binding_signature = create_binding_signature(
-        &format!("sha256:{}", attestation.phone_hash.to_hex()),
-        &attestation.user_pubkey.to_base64(),
-        attestation.proxy_number.as_str(),
-        attestation.iat.timestamp(),
-        issuer_private_key,
-    )?;
-    
-    // Convert to JWT claims with binding signature
-    let mut claims = Claims::from_attestation(&attestation);
-    claims.binding_proof = binding_signature;
-    
-    // Encode with our Ed25519 JWT implementation
-    encode_jwt(&claims, issuer_private_key)
+    .build_jwt()
 }
 
 #[cfg(test)]
