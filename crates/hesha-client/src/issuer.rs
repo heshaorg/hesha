@@ -13,7 +13,7 @@ pub struct AttestationRequest {
     pub phone_number: String,
     /// User's public key.
     pub user_pubkey: String,
-    /// Optional scope for proxy number generation (e.g., "990" for global, "1" for US).
+    /// Optional scope for proxy number generation (e.g., "1" for US, "44" for UK, "234" for Nigeria).
     #[serde(skip_serializing_if = "Option::is_none")]
     pub scope: Option<String>,
 }

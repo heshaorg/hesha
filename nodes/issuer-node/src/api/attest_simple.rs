@@ -21,7 +21,7 @@ pub struct SimpleAttestationRequest {
     /// Verification code (checked against configured value in demo mode).
     pub verification_code: String,
     
-    /// Scope - 1-4 digit calling code (default: 990 for global).
+    /// Scope - 1-4 digit country calling code (e.g., "1", "44", "234").
     pub scope: Option<String>,
 }
 
@@ -100,7 +100,15 @@ pub async fn attest_simple(
     
     // Generate proxy number using new algorithm
     let nonce = generate_hex_nonce();
-    let scope = req.scope.as_deref().unwrap_or("990");
+    let scope = req.scope.as_deref().ok_or_else(|| {
+        (
+            axum::http::StatusCode::BAD_REQUEST,
+            Json(json!({
+                "error": "scope_required",
+                "message": "Scope (country code) is required"
+            }))
+        )
+    })?;
     let generation_input = ProxyGenerationInput {
         phone_number: req.phone.clone(),
         user_pubkey: user_keypair.public.to_base64(),

@@ -79,7 +79,7 @@ mod tests {
         let issuer_key = generate_keypair().unwrap();
         let user_key = generate_keypair().unwrap();
         let phone = PhoneNumber::new("+1234567890").unwrap();
-        let proxy = ProxyNumber::new("+99012345678901").unwrap();
+        let proxy = ProxyNumber::new("+23400123456789").unwrap();
         
         let jwt = create_attestation(
             "issuer.com",
@@ -101,7 +101,7 @@ mod tests {
         let issuer_key = generate_keypair().unwrap();
         let user_key = generate_keypair().unwrap();
         let phone = PhoneNumber::new("+1234567890").unwrap();
-        let proxy = ProxyNumber::new("+99012345678901").unwrap();
+        let proxy = ProxyNumber::new("+23400123456789").unwrap();
         
         let jwt = create_attestation(
             "issuer.com",
@@ -122,7 +122,7 @@ mod tests {
         
         let user_key = generate_keypair().unwrap();
         let expired_attestation = Attestation {
-            proxy_number: ProxyNumber::new("+99012345678901").unwrap(),
+            proxy_number: ProxyNumber::new("+23400123456789").unwrap(),
             phone_hash: PhoneHash::from_bytes([0u8; 32]),
             iss: "issuer.com".to_string(),
             trust_domain: None,

@@ -47,11 +47,11 @@ The issuer will verify your phone number ownership (method varies by issuer)
 and provide a signed JWT attestation that binds a proxy number to your public key.
 
 Examples:
-  # Request global proxy number (+990...)
-  hesha attest -i https://issuer.example.com -p +1234567890
-  
-  # Request US local proxy number (+1...)
+  # Request US proxy number (+100...)
   hesha attest -i https://issuer.example.com -p +1234567890 -s 1
+  
+  # Request UK proxy number (+4400...)  
+  hesha attest -i https://issuer.example.com -p +447700123456 -s 44
   
   # Save attestation to file
   hesha attest -i https://issuer.example.com -p +1234567890 -o attestation.jwt
@@ -65,8 +65,8 @@ Examples:
         #[arg(short, long, value_name = "PHONE")]
         phone: String,
         
-        /// Scope - calling code for proxy number (default: 990 for global)
-        #[arg(short, long, value_name = "CODE", default_value = "990")]
+        /// Scope - country calling code for proxy number (e.g., 1, 44, 234)
+        #[arg(short, long, value_name = "CODE")]
         scope: String,
         
         /// Private key file (or use HASHA_PRIVATE_KEY env)

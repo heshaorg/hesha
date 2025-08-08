@@ -104,3 +104,7 @@ fn find_issuer_binary() -> anyhow::Result<PathBuf> {
     
     anyhow::bail!("Could not find issuer-node binary. Run 'cargo build --release' first.");
 }
+
+
+
+

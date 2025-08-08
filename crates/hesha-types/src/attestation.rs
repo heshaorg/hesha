@@ -169,7 +169,7 @@ mod tests {
     #[test]
     fn test_attestation_expiry() {
         let attestation = Attestation {
-            proxy_number: ProxyNumber::new("+99012345678901").unwrap(),
+            proxy_number: ProxyNumber::new("+23400123456789").unwrap(),
             phone_hash: PhoneHash::from_bytes([0u8; 32]),
             iss: "example.com".to_string(),
             trust_domain: None,
@@ -188,7 +188,7 @@ mod tests {
     #[test]
     fn test_attestation_serialization() {
         let attestation = Attestation {
-            proxy_number: ProxyNumber::new("+99012345678901").unwrap(),
+            proxy_number: ProxyNumber::new("+23400123456789").unwrap(),
             phone_hash: PhoneHash::from_bytes([42u8; 32]),
             iss: "example.com".to_string(),
             trust_domain: None,

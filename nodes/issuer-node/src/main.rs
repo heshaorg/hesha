@@ -101,7 +101,7 @@ mod tests {
             "version": "0.1.0-alpha",
             "phone_number": phone.to_string(),
             "user_pubkey": user_key.public.to_base64(),
-            "scope": "990",
+            "scope": "234",
         });
         
         let response = client

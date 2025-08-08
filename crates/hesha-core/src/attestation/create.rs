@@ -202,7 +202,7 @@ mod tests {
         let issuer_key = generate_keypair().unwrap();
         let user_key = generate_keypair().unwrap();
         let phone = PhoneNumber::new("+1234567890").unwrap();
-        let proxy = ProxyNumber::new("+99012345678901").unwrap();
+        let proxy = ProxyNumber::new("+23400123456789").unwrap();
         
         let attestation = AttestationBuilder::new(
             "issuer.com".to_string(),
@@ -224,7 +224,7 @@ mod tests {
         let issuer_key = generate_keypair().unwrap();
         let user_key = generate_keypair().unwrap();
         let phone = PhoneNumber::new("+1234567890").unwrap();
-        let proxy = ProxyNumber::new("+99012345678901").unwrap();
+        let proxy = ProxyNumber::new("+23400123456789").unwrap();
         
         let jwt = create_attestation(
             "issuer.com",
@@ -244,7 +244,7 @@ mod tests {
         let issuer_key = generate_keypair().unwrap();
         let user_key = generate_keypair().unwrap();
         let phone = PhoneNumber::new("+1234567890").unwrap();
-        let proxy = ProxyNumber::new("+99012345678901").unwrap();
+        let proxy = ProxyNumber::new("+23400123456789").unwrap();
         
         let attestation = AttestationBuilder::new(
             "api.example.com".to_string(),

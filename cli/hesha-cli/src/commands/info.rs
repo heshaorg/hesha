@@ -15,8 +15,8 @@ pub fn execute() -> anyhow::Result<()> {
     
     println!("{}", "Key Concepts:".bold());
     println!("• {} - Anonymized phone numbers that preserve privacy", "Proxy Numbers".yellow());
-    println!("  - Global format: +990XXXXXXXXXXX");
-    println!("  - Local format: +<country_code>00XXXXXXXX");
+    println!("  - Format: +<country_code>00XXXXXXXX");
+    println!("  - Example: +23400123456 (Nigeria), +4400987654 (UK)");
     println!();
     
     println!("• {} - Signed JWTs proving phone ownership", "Attestations".yellow());
