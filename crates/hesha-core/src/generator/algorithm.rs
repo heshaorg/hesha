@@ -89,7 +89,7 @@ fn format_proxy_number(scope: &str, digits: &str) -> HeshaResult<ProxyNumber> {
     let cc_len = scope.len();
     
     // Calculate digits after "00" pattern
-    let digits_after_00 = std::cmp::max(8, std::cmp::min(10, 15 - cc_len - 3));
+    let digits_after_00 = (15 - cc_len - 3).clamp(8, 10);
     
     // Take the required number of digits
     let proxy_digits = &digits[..digits_after_00];

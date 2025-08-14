@@ -70,7 +70,7 @@ impl StartCmd {
         } else {
             // Run in foreground using cargo
             let status = Command::new("cargo")
-                .args(&["run", "--bin", "issuer-node"])
+                .args(["run", "--bin", "issuer-node"])
                 .env("HESHA_CONFIG_DIR", &config_dir)
                 .status()?;
             
