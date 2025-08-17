@@ -31,7 +31,7 @@ pub fn execute(attestation: &str) -> anyhow::Result<()> {
     println!("  User Public Key: {}", attestation.user_pubkey.to_base64());
     println!("  Binding Proof:  {}", hex::encode(attestation.binding_proof.as_bytes()));
     println!("  Salt:           {}", hex::encode(&attestation.salt));
-    println!("  Nonce:          {}", attestation.nonce.to_string());
+    println!("  Nonce:          {}", attestation.nonce);
     
     println!("\n{}", "JWT Token:".yellow());
     println!("  Length:         {} bytes", jwt.len());

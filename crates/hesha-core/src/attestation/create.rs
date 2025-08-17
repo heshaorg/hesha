@@ -68,7 +68,7 @@ impl<'a> AttestationBuilder<'a> {
             &self.user_pubkey.to_base64(),
             self.proxy_number.as_str(),
             iat,
-            &self.issuer_private_key,
+            self.issuer_private_key,
         )?;
         
         // Parse hash from "sha256:..." format

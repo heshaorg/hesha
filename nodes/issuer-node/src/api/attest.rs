@@ -104,7 +104,7 @@ pub async fn attest(
     let validity_days = match req.validity_days {
         Some(days) => {
             // Enforce reasonable limits (1 day to 2 years)
-            if days < 1 || days > 730 {
+            if !(1..=730).contains(&days) {
                 return Err((
                     axum::http::StatusCode::BAD_REQUEST,
                     Json(json!({

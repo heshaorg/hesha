@@ -40,7 +40,7 @@ impl PhoneNumber {
         }
         
         let digit_count = digits.len();
-        if digit_count < 7 || digit_count > 15 {
+        if !(7..=15).contains(&digit_count) {
             return Err(HeshaError::InvalidPhoneNumber(
                 format!("Phone number must have 7-15 digits, found {}", digit_count)
             ));
