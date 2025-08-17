@@ -1,13 +1,13 @@
 //! HTTP client library for the Hesha Protocol.
-//! 
+//!
 //! This crate provides typed HTTP clients for interacting with
 //! Hesha Protocol nodes:
-//! 
+//!
 //! - `IssuerClient`: For requesting attestations
 //! - Helper types for requests and responses
-//! 
+//!
 //! # Security
-//! 
+//!
 //! - Enforces HTTPS for production use
 //! - Includes timeout protection
 //! - Validates response formats

@@ -41,38 +41,34 @@ pub struct IssuerClient {
 impl IssuerClient {
     /// Create a new issuer client.
     pub fn new(base_url: &str) -> ClientResult<Self> {
-        let base_url = Url::parse(base_url)
-            .map_err(|e| ClientError::InvalidUrl(e.to_string()))?;
-        
+        let base_url = Url::parse(base_url).map_err(|e| ClientError::InvalidUrl(e.to_string()))?;
+
         // Ensure HTTPS for security
-        if base_url.scheme() != "https" && !base_url.host_str().unwrap_or("").starts_with("localhost") {
+        if base_url.scheme() != "https"
+            && !base_url.host_str().unwrap_or("").starts_with("localhost")
+        {
             return Err(ClientError::InvalidUrl(
-                "Issuer URL must use HTTPS".to_string()
+                "Issuer URL must use HTTPS".to_string(),
             ));
         }
-        
-        let client = Client::builder()
-            .timeout(Duration::from_secs(30))
-            .build()?;
-        
+
+        let client = Client::builder().timeout(Duration::from_secs(30)).build()?;
+
         Ok(Self { client, base_url })
     }
-    
+
     /// Create a client for testing (allows HTTP).
     #[cfg(any(test, debug_assertions))]
     pub fn new_insecure(base_url: &str) -> ClientResult<Self> {
-        let base_url = Url::parse(base_url)
-            .map_err(|e| ClientError::InvalidUrl(e.to_string()))?;
-        
-        let client = Client::builder()
-            .timeout(Duration::from_secs(30))
-            .build()?;
-        
+        let base_url = Url::parse(base_url).map_err(|e| ClientError::InvalidUrl(e.to_string()))?;
+
+        let client = Client::builder().timeout(Duration::from_secs(30)).build()?;
+
         Ok(Self { client, base_url })
     }
-    
+
     /// Request attestation for a verified phone number.
-    /// 
+    ///
     /// Note: scope is now required by the protocol. Use the phone's country code
     /// or specify a different scope for the proxy number.
     pub async fn request_attestation(
@@ -82,9 +78,11 @@ impl IssuerClient {
         scope: &str,
         validity_days: Option<i64>,
     ) -> ClientResult<AttestationResponse> {
-        let url = self.base_url.join("attest")
+        let url = self
+            .base_url
+            .join("attest")
             .map_err(|e| ClientError::InvalidUrl(e.to_string()))?;
-        
+
         let request = AttestationRequest {
             version: "0.1.0-alpha".to_string(),
             phone_number: phone_number.to_string(),
@@ -92,39 +90,38 @@ impl IssuerClient {
             scope: scope.to_string(),
             validity_days,
         };
-        
-        let response = self.client
-            .post(url)
-            .json(&request)
-            .send()
-            .await?;
-        
+
+        let response = self.client.post(url).json(&request).send().await?;
+
         if !response.status().is_success() {
             let status = response.status().as_u16();
-            let message = response.text().await.unwrap_or_else(|_| "Unknown error".to_string());
+            let message = response
+                .text()
+                .await
+                .unwrap_or_else(|_| "Unknown error".to_string());
             return Err(ClientError::ServerError { status, message });
         }
-        
-        response.json()
+
+        response
+            .json()
             .await
             .map_err(|e| ClientError::InvalidResponse(e.to_string()))
     }
-    
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_client_creation() {
         // HTTPS required
         assert!(IssuerClient::new("https://issuer.com").is_ok());
         assert!(IssuerClient::new("http://issuer.com").is_err());
-        
+
         // Localhost allowed
         assert!(IssuerClient::new("http://localhost:8080").is_ok());
-        
+
         // Invalid URL
         assert!(IssuerClient::new("not a url").is_err());
     }

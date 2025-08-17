@@ -7,7 +7,7 @@ use serde_json::json;
 /// Execute keygen command.
 pub fn execute(format: &str) -> anyhow::Result<()> {
     let keypair = generate_keypair()?;
-    
+
     match format {
         "json" => {
             let output = json!({
@@ -28,10 +28,10 @@ pub fn execute(format: &str) -> anyhow::Result<()> {
             anyhow::bail!("Unknown format: {}. Use json, hex, or base64", format);
         }
     }
-    
+
     eprintln!();
     output::success("Keys generated successfully!");
     output::warning("Store your private key securely.");
-    
+
     Ok(())
 }

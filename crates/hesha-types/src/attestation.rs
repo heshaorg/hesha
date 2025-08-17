@@ -8,43 +8,43 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 /// JWT attestation claims.
-/// 
+///
 /// This is the core data structure that proves a user owns a phone number.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Attestation {
     /// The proxy number assigned to the user.
     pub proxy_number: ProxyNumber,
-    
+
     /// SHA256 hash of the salted phone number.
     pub phone_hash: PhoneHash,
-    
+
     /// Issuer domain (e.g., "example.com").
     pub iss: String,
-    
+
     /// Trust domain (e.g., "example.com" when service runs on "api.example.com").
     /// If None, defaults to the issuer domain.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub trust_domain: Option<String>,
-    
+
     /// Expiration time.
     pub exp: DateTime<Utc>,
-    
+
     /// Issued at time.
     pub iat: DateTime<Utc>,
-    
+
     /// User's public key for challenge-response.
     pub user_pubkey: PublicKey,
-    
+
     /// Cryptographic binding between phone_hash and proxy_number.
     pub binding_proof: BindingProof,
-    
+
     /// Salt used for phone hashing.
     #[serde(with = "base64_serde")]
     pub salt: Vec<u8>,
-    
+
     /// JWT ID for uniqueness.
     pub jti: String,
-    
+
     /// Nonce for replay protection.
     pub nonce: Nonce,
 }
@@ -54,12 +54,12 @@ impl Attestation {
     pub fn is_expired(&self) -> bool {
         Utc::now() > self.exp
     }
-    
+
     /// Get the time until expiration.
     pub fn time_until_expiry(&self) -> chrono::Duration {
         self.exp - Utc::now()
     }
-    
+
     /// Get the effective trust domain for verification.
     /// Returns the trust_domain if set, otherwise falls back to iss.
     pub fn effective_trust_domain(&self) -> &str {
@@ -72,10 +72,10 @@ impl Attestation {
 pub struct Challenge {
     /// Random nonce from the service.
     pub nonce: Nonce,
-    
+
     /// Service context (e.g., "signal.org").
     pub service_context: String,
-    
+
     /// Timestamp of challenge creation.
     pub timestamp: DateTime<Utc>,
 }
@@ -85,10 +85,10 @@ pub struct Challenge {
 pub struct ChallengeResponse {
     /// The original challenge.
     pub challenge: Challenge,
-    
+
     /// User's signature over challenge || service_context || timestamp.
     pub signature: Signature,
-    
+
     /// The attestation being used.
     pub attestation_id: String,
 }
@@ -98,16 +98,16 @@ pub struct ChallengeResponse {
 pub struct IssuerInfo {
     /// Issuer's public key.
     pub public_key: PublicKey,
-    
+
     /// Algorithm (always "Ed25519" for now).
     pub algorithm: String,
-    
+
     /// When the key was created.
     pub created_at: DateTime<Utc>,
-    
+
     /// Optional key ID for rotation.
     pub key_id: Option<String>,
-    
+
     /// Service discovery information for subdomain deployments.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub service_info: Option<ServiceDiscovery>,
@@ -118,10 +118,10 @@ pub struct IssuerInfo {
 pub struct ServiceDiscovery {
     /// Service URL (e.g., "https://api.example.com").
     pub service_url: String,
-    
+
     /// Trust relationship type (e.g., "subdomain", "partner").
     pub relationship: String,
-    
+
     /// Additional metadata for verification.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub metadata: Option<serde_json::Value>,
@@ -132,32 +132,34 @@ pub struct ServiceDiscovery {
 pub struct VerifiedAttestation {
     /// The validated attestation.
     pub attestation: Attestation,
-    
+
     /// Issuer that signed it.
     pub issuer: String,
-    
+
     /// When it was verified.
     pub verified_at: DateTime<Utc>,
 }
 
 // Helper module for base64 serialization
 mod base64_serde {
+    use base64::{engine::general_purpose, Engine as _};
     use serde::{Deserialize, Deserializer, Serializer};
-    use base64::{Engine as _, engine::general_purpose};
-    
+
     pub fn serialize<S>(bytes: &[u8], serializer: S) -> Result<S::Ok, S::Error>
     where
         S: Serializer,
     {
         serializer.serialize_str(&general_purpose::URL_SAFE_NO_PAD.encode(bytes))
     }
-    
+
     pub fn deserialize<'de, D>(deserializer: D) -> Result<Vec<u8>, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = String::deserialize(deserializer)?;
-        general_purpose::URL_SAFE_NO_PAD.decode(s).map_err(serde::de::Error::custom)
+        general_purpose::URL_SAFE_NO_PAD
+            .decode(s)
+            .map_err(serde::de::Error::custom)
     }
 }
 
@@ -165,7 +167,7 @@ mod base64_serde {
 mod tests {
     use super::*;
     use crate::crypto::BindingProof;
-    
+
     #[test]
     fn test_attestation_expiry() {
         let attestation = Attestation {
@@ -181,10 +183,10 @@ mod tests {
             jti: "test-jti".to_string(),
             nonce: Nonce::new("test-nonce"),
         };
-        
+
         assert!(attestation.is_expired());
     }
-    
+
     #[test]
     fn test_attestation_serialization() {
         let attestation = Attestation {
@@ -200,10 +202,10 @@ mod tests {
             jti: "unique-id".to_string(),
             nonce: Nonce::new("random-nonce"),
         };
-        
+
         let json = serde_json::to_string(&attestation).unwrap();
         let decoded: Attestation = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(attestation.jti, decoded.jti);
         assert_eq!(attestation.proxy_number, decoded.proxy_number);
     }
