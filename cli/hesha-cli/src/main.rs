@@ -23,7 +23,7 @@ For more information about the Hesha Protocol, visit: https://github.com/hesha-p
 struct Cli {
     #[command(subcommand)]
     command: Commands,
-    
+
     /// Enable verbose output
     #[arg(short, long, global = true)]
     verbose: bool,
@@ -32,13 +32,15 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     /// Generate a new Ed25519 keypair for attestations
-    #[command(long_about = "\nGenerate a new Ed25519 keypair for use with the Hesha Protocol.\n\nThe private key is used to sign challenge responses, while the public key\nis included in attestation requests.\n\nOutput formats:\n  json   - JSON object with base64url-encoded keys (default)\n  hex    - Hexadecimal encoding\n  base64 - Base64url encoding (no padding)\n\nExamples:\n  # Generate and save to file\n  hesha keygen > keys.json\n  \n  # Generate in hex format\n  hesha keygen -f hex\n  \n  # Set as environment variable\n  export HESHA_PRIVATE_KEY=$(hesha keygen -f base64 | grep 'Private' | cut -d' ' -f3)\n")]
+    #[command(
+        long_about = "\nGenerate a new Ed25519 keypair for use with the Hesha Protocol.\n\nThe private key is used to sign challenge responses, while the public key\nis included in attestation requests.\n\nOutput formats:\n  json   - JSON object with base64url-encoded keys (default)\n  hex    - Hexadecimal encoding\n  base64 - Base64url encoding (no padding)\n\nExamples:\n  # Generate and save to file\n  hesha keygen > keys.json\n  \n  # Generate in hex format\n  hesha keygen -f hex\n  \n  # Set as environment variable\n  export HESHA_PRIVATE_KEY=$(hesha keygen -f base64 | grep 'Private' | cut -d' ' -f3)\n"
+    )]
     Keygen {
         /// Output format (json, hex, base64)
         #[arg(short, long, default_value = "json", value_name = "FORMAT")]
         format: String,
     },
-    
+
     /// Request attestation from an issuer
     #[command(long_about = "
 Request a proxy phone number attestation from an issuer.
@@ -63,28 +65,28 @@ Examples:
         /// Issuer URL (e.g., https://issuer.example.com)
         #[arg(short, long, value_name = "URL")]
         issuer: String,
-        
+
         /// Phone number to attest (E.164 format)
         #[arg(short, long, value_name = "PHONE")]
         phone: String,
-        
+
         /// Scope - country calling code for proxy number (e.g., 1, 44, 234)
         #[arg(short, long, value_name = "CODE")]
         scope: String,
-        
+
         /// Private key file (or use HASHA_PRIVATE_KEY env)
         #[arg(short, long, value_name = "FILE")]
         key: Option<String>,
-        
+
         /// Output file for attestation
         #[arg(short, long, value_name = "FILE")]
         output: Option<String>,
-        
+
         /// Validity period in days (optional, uses issuer default if not specified)
         #[arg(short = 'd', long, value_name = "DAYS", value_parser = clap::value_parser!(i64).range(1..=730))]
         validity_days: Option<i64>,
     },
-    
+
     /// Verify an attestation's cryptographic validity
     #[command(long_about = "
 Verify the cryptographic validity of a Hasha attestation.
@@ -109,12 +111,12 @@ Examples:
         /// Attestation file or JWT string
         #[arg(short, long, value_name = "FILE_OR_JWT")]
         attestation: String,
-        
+
         /// Expected phone number to verify (optional)
         #[arg(short, long, value_name = "PHONE")]
         phone: Option<String>,
     },
-    
+
     /// Display attestation details without verification
     #[command(long_about = "
 Display the contents of a Hasha attestation without verification.
@@ -141,7 +143,7 @@ Examples:
         #[arg(value_name = "FILE_OR_JWT")]
         attestation: String,
     },
-    
+
     /// Display information about the Hesha Protocol
     #[command(long_about = "
 Display information about the Hesha Protocol, including:
@@ -151,7 +153,7 @@ Display information about the Hesha Protocol, including:
 - Links to documentation
 ")]
     Info,
-    
+
     /// Setup a new Hesha issuer with interactive configuration
     #[command(name = "setup")]
     #[command(long_about = "
@@ -180,7 +182,7 @@ Examples:
   hesha setup --non-interactive
 ")]
     Setup(commands::setup_issuer::SetupIssuerCmd),
-    
+
     /// Start the Hesha issuer node
     #[command(name = "start")]
     #[command(long_about = "
@@ -197,7 +199,7 @@ Examples:
   hesha start --daemon
 ")]
     Start(commands::start::StartCmd),
-    
+
     /// Stop the Hesha issuer node
     #[command(name = "stop")]
     #[command(long_about = "
@@ -216,18 +218,33 @@ Examples:
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
-    
+
     // Set up basic logging
     if cli.verbose {
         std::env::set_var("RUST_LOG", "debug");
     }
-    
+
     match cli.command {
         Commands::Keygen { format } => {
             commands::keygen::execute(&format)?;
         }
-        Commands::Attest { issuer, phone, scope, key, output, validity_days } => {
-            commands::attest::execute(&issuer, &phone, &scope, key.as_deref(), output.as_deref(), validity_days).await?;
+        Commands::Attest {
+            issuer,
+            phone,
+            scope,
+            key,
+            output,
+            validity_days,
+        } => {
+            commands::attest::execute(
+                &issuer,
+                &phone,
+                &scope,
+                key.as_deref(),
+                output.as_deref(),
+                validity_days,
+            )
+            .await?;
         }
         Commands::Verify { attestation, phone } => {
             commands::verify::execute(&attestation, phone.as_deref()).await?;
@@ -248,6 +265,6 @@ async fn main() -> anyhow::Result<()> {
             cmd.execute()?;
         }
     }
-    
+
     Ok(())
 }

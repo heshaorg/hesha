@@ -17,21 +17,22 @@ impl Config {
             // Default to current directory
             PathBuf::from("issuer.toml")
         };
-        
+
         // Load from issuer.toml
         if config_path.exists() {
             let contents = fs::read_to_string(&config_path)?;
             let issuer_config: IssuerConfig = toml::from_str(&contents)?;
-            
+
             // Build config from IssuerConfig
             let bind_address: SocketAddr = format!("127.0.0.1:{}", issuer_config.port).parse()?;
-            
+
             // Derive private key path from config directory
-            let private_key_path = config_path.parent()
+            let private_key_path = config_path
+                .parent()
                 .and_then(|p| p.parent())
                 .map(|p| p.join("keys").join("private.key"))
                 .and_then(|p| p.to_str().map(|s| s.to_string()));
-            
+
             Ok(Config {
                 bind_address,
                 domain: issuer_config.identity.trust_domain.clone(),
@@ -46,8 +47,7 @@ impl Config {
                 bind_address: env::var("BIND_ADDRESS")
                     .unwrap_or_else(|_| "127.0.0.1:3000".to_string())
                     .parse()?,
-                domain: env::var("ISSUER_DOMAIN")
-                    .unwrap_or_else(|_| "localhost:3000".to_string()),
+                domain: env::var("ISSUER_DOMAIN").unwrap_or_else(|_| "localhost:3000".to_string()),
                 trust_domain: None,
                 service_url: None,
                 private_key_path: env::var("PRIVATE_KEY_PATH").ok(),

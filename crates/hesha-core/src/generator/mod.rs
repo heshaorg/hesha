@@ -28,7 +28,7 @@ pub fn generate_proxy_number(input: &ProxyGenerationInput) -> HeshaResult<ProxyN
 mod tests {
     use super::*;
     use hesha_crypto::generate_hex_nonce;
-    
+
     #[test]
     fn test_generate_proxy_number() {
         let input = ProxyGenerationInput {
@@ -38,10 +38,10 @@ mod tests {
             scope: "1".to_string(),
             nonce: generate_hex_nonce(),
         };
-        
+
         let proxy = generate_proxy_number(&input).unwrap();
         assert!(proxy.as_str().starts_with("+100"));
-        
+
         // Test determinism
         let proxy2 = generate_proxy_number(&input).unwrap();
         assert_eq!(proxy, proxy2);
