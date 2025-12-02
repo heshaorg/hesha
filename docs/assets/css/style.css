@@ -1,11 +1,11 @@
 /* Hesha Protocol Website Styles - Marketing Focus */
 
 :root {
-    --primary-color: #6366f1;
-    --primary-dark: #4f46e5;
-    --primary-light: #818cf8;
+    --primary-color: #1e40af;
+    --primary-dark: #1e3a8a;
+    --primary-light: #2563eb;
     --secondary-color: #22d3ee;
-    --accent-color: #ec4899;
+    --accent-color: #0ea5e9;
     --success-color: #10b981;
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
@@ -126,7 +126,7 @@ body {
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+    background: radial-gradient(circle, rgba(30, 64, 175, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
     transform: rotate(45deg);
     z-index: 0;
@@ -159,7 +159,7 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -458,7 +458,7 @@ body {
 
 .proxy-card.phone {
     border: 2px solid var(--primary-color);
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
 }
 
 .proxy-icon {
@@ -513,7 +513,7 @@ body {
 
 /* Solution Intro */
 .bg-gradient {
-    background: linear-gradient(135deg, #f3f4f6 0%, #e0e7ff 100%);
+    background: linear-gradient(135deg, #f3f4f6 0%, #dbeafe 100%);
 }
 
 .solution-intro-content {
@@ -772,7 +772,7 @@ body {
 }
 
 .flow-step.highlight {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     border: 2px solid var(--primary-light);
 }
 
@@ -1251,7 +1251,7 @@ body {
     right: 0;
     bottom: 0;
     background: radial-gradient(circle at top right, var(--primary-color) 0%, transparent 50%),
-                radial-gradient(circle at bottom left, var(--accent-color) 0%, transparent 50%);
+                radial-gradient(circle at bottom left, var(--secondary-color) 0%, transparent 50%);
     opacity: 0.1;
 }
 

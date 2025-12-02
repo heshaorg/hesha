@@ -69,7 +69,7 @@ graph LR
 - 🔧 [Protocol Specification](docs/hesha-protocol-specification.md) - Technical details
 - 🖼️ [Sequence Diagrams](docs/sequence-diagrams.md) - Visual protocol flows
 - 🏗️ [Issuer Specification](docs/hesha-issuer-node-specification.md) - Running an issuer
-- 📱 [Wallet Specification](docs/hesha-wallet-technical-specification.md) - Building a wallet
+- 📱 [Wallet Specification](docs/hesha-wallet-specification.md) - Building a wallet
 
 ## Project Structure
 
@@ -164,7 +164,7 @@ cargo run -p issuer-node
 ./target/release/issuer-node --config config.toml
 ```
 
-See [Issuer Setup Guide](docs/ISSUER_SETUP.md) for production deployment.
+See [Issuer Node Specification](docs/hesha-issuer-node-specification.md) for production deployment.
 
 ## Contributing
 
