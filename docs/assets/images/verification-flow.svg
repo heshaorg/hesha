@@ -1,85 +1,156 @@
-<svg width="700" height="400" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="verifyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Gradients -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
     </linearGradient>
-    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="#e5e7eb"/>
-      <circle cx="12" cy="12" r="1" fill="#e5e7eb"/>
-    </pattern>
-  </defs>
-  
-  <!-- Title -->
-  <text x="350" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#1f2937">Cryptographic Verification Flow</text>
-  
-  <!-- User shares with service -->
-  <g transform="translate(50, 100)">
-    <!-- User -->
-    <circle cx="40" cy="40" r="30" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
-    <text x="40" y="45" text-anchor="middle" font-family="Inter, sans-serif" font-size="20">👤</text>
-    <text x="40" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">User</text>
-    
-    <!-- Attestation -->
-    <rect x="90" y="20" width="80" height="40" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
-    <text x="130" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#92400e">JWT</text>
-    <text x="130" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#92400e">eyJ0eXAi...</text>
-  </g>
-  
-  <!-- Arrow to service -->
-  <path d="M 220 120 L 300 120" stroke="#6366f1" stroke-width="3" marker-end="url(#arrow1)"/>
-  <text x="260" y="110" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#6366f1">Shares proxy + JWT</text>
-  
-  <!-- Service verification -->
-  <g transform="translate(350, 80)">
-    <rect x="0" y="0" width="300" height="240" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2"/>
-    <rect x="0" y="0" width="300" height="240" rx="10" fill="url(#dots)" opacity="0.5"/>
-    
-    <!-- Service header -->
-    <rect x="0" y="0" width="300" height="40" rx="10" fill="#1f2937"/>
-    <text x="150" y="25" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="white">Service Verification Process</text>
-    
-    <!-- Step 1 -->
-    <circle cx="30" cy="70" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
-    <text x="30" y="75" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">1</text>
-    <text x="130" y="75" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Extract issuer from JWT</text>
-    
-    <!-- Step 2 -->
-    <circle cx="30" cy="110" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
-    <text x="30" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">2</text>
-    <text x="130" y="115" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Fetch public key (or use cache)</text>
-    
-    <!-- Step 3 -->
-    <circle cx="30" cy="150" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
-    <text x="30" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">3</text>
-    <text x="130" y="155" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Verify JWT signature</text>
-    
-    <!-- Step 4 -->
-    <circle cx="30" cy="190" r="15" fill="url(#verifyGrad)" stroke="#059669" stroke-width="2"/>
-    <text x="30" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="white">4</text>
-    <text x="130" y="195" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Check binding proof</text>
-    
-    <!-- Checkmark -->
-    <circle cx="260" cy="130" r="25" fill="#10b981" stroke="#059669" stroke-width="3"/>
-    <path d="M 245 130 L 255 140 L 275 120" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-  
-  <!-- Key fetch indicator -->
-  <g transform="translate(500, 50)">
-    <circle cx="0" cy="0" r="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
-    <text x="0" y="5" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#2563eb">🔑</text>
-    <text x="0" y="-30" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1e40af">Key Fetch</text>
-    <text x="0" y="-45" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1e40af">Once*</text>
-  </g>
-  
-  <!-- Benefits -->
-  <rect x="100" y="350" width="500" height="35" rx="17" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
-  <text x="350" y="373" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#065f46">🔒 Cryptographic • ✓ Verifiable • 🔑 Cacheable keys • 🛡️ Privacy preserved</text>
-  
-  <!-- Arrow marker -->
-  <defs>
-    <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L9,3 z" fill="#6366f1"/>
+
+    <!-- Shadows -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+
+    <!-- Arrow markers -->
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M0,0 L0,12 L12,6 z" fill="#1e40af"/>
+    </marker>
+
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L0,10 L10,5 z" fill="#10b981"/>
     </marker>
   </defs>
+
+  <!-- Background pattern -->
+  <rect width="800" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#1f2937">
+    Instant Cryptographic Verification
+  </text>
+
+  <!-- User Section -->
+  <g transform="translate(60, 120)">
+    <!-- User Icon Container -->
+    <rect x="0" y="0" width="120" height="160" rx="12" fill="#eff6ff" stroke="#1e40af" stroke-width="2" filter="url(#shadow)"/>
+
+    <!-- User Icon -->
+    <circle cx="60" cy="50" r="25" fill="url(#blueGrad)"/>
+    <path d="M 60 45 A 8 8 0 0 1 60 45" stroke="white" stroke-width="3" fill="white"/>
+    <circle cx="60" cy="42" r="8" fill="white"/>
+    <path d="M 45 65 Q 60 55 75 65" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- User Label -->
+    <text x="60" y="90" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#1f2937">User</text>
+
+    <!-- Proxy Number -->
+    <rect x="10" y="105" width="100" height="20" rx="4" fill="#dbeafe"/>
+    <text x="60" y="118" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#1e40af">+1-001-234-5678</text>
+
+    <!-- JWT Token -->
+    <rect x="10" y="130" width="100" height="20" rx="4" fill="#fef3c7"/>
+    <text x="60" y="143" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#92400e">JWT: eyJ0eX...</text>
+  </g>
+
+  <!-- Arrow from User to Service -->
+  <g>
+    <path d="M 200 200 L 280 200" stroke="#1e40af" stroke-width="3" marker-end="url(#arrowBlue)" stroke-dasharray="5,5" opacity="0.8"/>
+    <text x="240" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1e40af">Shares</text>
+  </g>
+
+  <!-- Service Verification Box -->
+  <g transform="translate(300, 100)">
+    <!-- Main Container -->
+    <rect x="0" y="0" width="280" height="200" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="2" filter="url(#shadow)"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="280" height="40" rx="12" fill="url(#blueGrad)"/>
+    <rect x="0" y="30" width="280" height="10" fill="url(#blueGrad)"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">
+      Service Verification
+    </text>
+
+    <!-- Steps -->
+    <g transform="translate(20, 60)">
+      <!-- Step 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="12" cy="12" r="10" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+        <text x="12" y="16" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1e40af">1</text>
+        <text x="120" y="16" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Parse JWT claims</text>
+      </g>
+
+      <!-- Step 2 -->
+      <g transform="translate(0, 35)">
+        <circle cx="12" cy="12" r="10" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+        <text x="12" y="16" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1e40af">2</text>
+        <text x="120" y="16" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Fetch issuer's public key</text>
+      </g>
+
+      <!-- Step 3 -->
+      <g transform="translate(0, 70)">
+        <circle cx="12" cy="12" r="10" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+        <text x="12" y="16" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1e40af">3</text>
+        <text x="120" y="16" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Verify JWT signature</text>
+      </g>
+
+      <!-- Step 4 -->
+      <g transform="translate(0, 105)">
+        <circle cx="12" cy="12" r="10" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+        <text x="12" y="16" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1e40af">4</text>
+        <text x="120" y="16" font-family="Inter, sans-serif" font-size="12" fill="#1f2937">Validate binding proof</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Issuer Public Key -->
+  <g transform="translate(620, 120)">
+    <!-- Key Container -->
+    <rect x="0" y="0" width="120" height="80" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)"/>
+
+    <!-- Key Icon -->
+    <circle cx="60" cy="35" r="20" fill="#f59e0b"/>
+    <rect x="55" y="35" width="10" height="15" fill="#f59e0b"/>
+    <circle cx="60" cy="30" r="8" fill="#fef3c7"/>
+
+    <!-- Label -->
+    <text x="60" y="65" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#92400e">
+      Issuer's Public Key
+    </text>
+  </g>
+
+  <!-- Arrow from Service to Key -->
+  <g>
+    <path d="M 580 180 Q 600 160 620 160" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowGreen)" stroke-dasharray="3,3"/>
+    <text x="600" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#f59e0b">Fetch</text>
+  </g>
+
+  <!-- Success Result -->
+  <g transform="translate(360, 320)">
+    <!-- Success Badge -->
+    <rect x="0" y="0" width="160" height="50" rx="25" fill="url(#greenGrad)" filter="url(#shadow)"/>
+
+    <!-- Checkmark -->
+    <circle cx="30" cy="25" r="15" fill="white" opacity="0.3"/>
+    <path d="M 22 25 L 28 31 L 38 19" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Text -->
+    <text x="80" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">
+      Verified
+    </text>
+  </g>
+
+  <!-- Key Features Bottom -->
+  <g transform="translate(400, 370)">
+    <text x="0" y="0" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#6b7280">
+      No SMS • No Phone Calls • Instant Verification • Works Offline
+    </text>
+  </g>
+
+  <!-- Connection lines showing data flow -->
+  <path d="M 440 300 L 440 320" stroke="#10b981" stroke-width="2" marker-end="url(#arrowGreen)" opacity="0.6"/>
 </svg>
