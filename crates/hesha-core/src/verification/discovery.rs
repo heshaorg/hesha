@@ -21,26 +21,26 @@ impl IssuerKeyCache {
             ttl,
         }
     }
-    
+
     /// Get a key from the cache if not expired.
     pub fn get(&self, domain: &str) -> Option<PublicKey> {
         let cache = self.cache.lock().ok()?;
         let (key, inserted) = cache.get(domain)?;
-        
+
         if inserted.elapsed() < self.ttl {
             Some(key.clone())
         } else {
             None
         }
     }
-    
+
     /// Insert a key into the cache.
     pub fn insert(&self, domain: String, key: PublicKey) {
         if let Ok(mut cache) = self.cache.lock() {
             cache.insert(domain, (key, Instant::now()));
         }
     }
-    
+
     /// Clear the cache.
     pub fn clear(&self) {
         if let Ok(mut cache) = self.cache.lock() {
@@ -56,7 +56,7 @@ impl Default for IssuerKeyCache {
 }
 
 /// Discover an issuer's public key via .well-known endpoint.
-/// 
+///
 /// # Security Considerations
 /// - Always use HTTPS
 /// - Validate the response format
@@ -65,38 +65,38 @@ pub async fn discover_issuer_key(domain: &str) -> HeshaResult<PublicKey> {
     // Build URL - use HTTP for localhost, HTTPS for everything else
     let url = if domain.starts_with("http://") || domain.starts_with("https://") {
         return Err(HeshaError::InvalidAttestation(
-            "Domain should not include protocol".to_string()
+            "Domain should not include protocol".to_string(),
         ));
     } else if domain.starts_with("localhost") || domain.starts_with("127.0.0.1") {
         format!("http://{}/.well-known/hesha/pubkey.json", domain)
     } else {
         format!("https://{}/.well-known/hesha/pubkey.json", domain)
     };
-    
+
     // Make request with timeout
     let client = Client::builder()
         .timeout(Duration::from_secs(10))
         .build()
         .map_err(|e| HeshaError::CryptoError(format!("HTTP client error: {}", e)))?;
-    
+
     let response = client
         .get(&url)
         .send()
         .await
         .map_err(|e| HeshaError::CryptoError(format!("Key discovery failed: {}", e)))?;
-    
+
     if !response.status().is_success() {
         return Err(HeshaError::CryptoError(format!(
             "Key discovery failed with status: {}",
             response.status()
         )));
     }
-    
+
     let issuer_info: IssuerInfo = response
         .json()
         .await
         .map_err(|e| HeshaError::CryptoError(format!("Invalid issuer info JSON: {}", e)))?;
-    
+
     // Validate algorithm
     if issuer_info.algorithm != "Ed25519" {
         return Err(HeshaError::CryptoError(format!(
@@ -104,7 +104,7 @@ pub async fn discover_issuer_key(domain: &str) -> HeshaResult<PublicKey> {
             issuer_info.algorithm
         )));
     }
-    
+
     Ok(issuer_info.public_key)
 }
 
@@ -117,11 +117,11 @@ pub async fn discover_issuer_key_cached(
     if let Some(key) = cache.get(domain) {
         return Ok(key);
     }
-    
+
     // Discover and cache
     let key = discover_issuer_key(domain).await?;
     cache.insert(domain.to_string(), key.clone());
-    
+
     Ok(key)
 }
 
@@ -130,38 +130,38 @@ pub async fn discover_issuer_info(domain: &str) -> HeshaResult<IssuerInfo> {
     // Build URL - use HTTP for localhost, HTTPS for everything else
     let url = if domain.starts_with("http://") || domain.starts_with("https://") {
         return Err(HeshaError::InvalidAttestation(
-            "Domain should not include protocol".to_string()
+            "Domain should not include protocol".to_string(),
         ));
     } else if domain.starts_with("localhost") || domain.starts_with("127.0.0.1") {
         format!("http://{}/.well-known/hesha/pubkey.json", domain)
     } else {
         format!("https://{}/.well-known/hesha/pubkey.json", domain)
     };
-    
+
     // Make request with timeout
     let client = Client::builder()
         .timeout(Duration::from_secs(10))
         .build()
         .map_err(|e| HeshaError::CryptoError(format!("HTTP client error: {}", e)))?;
-    
+
     let response = client
         .get(&url)
         .send()
         .await
         .map_err(|e| HeshaError::CryptoError(format!("Key discovery failed: {}", e)))?;
-    
+
     if !response.status().is_success() {
         return Err(HeshaError::CryptoError(format!(
             "Key discovery failed with status: {}",
             response.status()
         )));
     }
-    
+
     let issuer_info: IssuerInfo = response
         .json()
         .await
         .map_err(|e| HeshaError::CryptoError(format!("Invalid issuer info JSON: {}", e)))?;
-    
+
     // Validate algorithm
     if issuer_info.algorithm != "Ed25519" {
         return Err(HeshaError::CryptoError(format!(
@@ -169,7 +169,7 @@ pub async fn discover_issuer_info(domain: &str) -> HeshaResult<IssuerInfo> {
             issuer_info.algorithm
         )));
     }
-    
+
     Ok(issuer_info)
 }
 
@@ -187,7 +187,7 @@ pub async fn resolve_trust_domain(trust_domain: &str) -> HeshaResult<(String, Pu
                     "subdomain" => {
                         // Extract domain from service URL
                         let service_domain = extract_domain_from_url(&service_info.service_url)?;
-                        
+
                         // Verify it's actually a subdomain of the trust domain
                         if !is_subdomain_of(&service_domain, trust_domain) {
                             return Err(HeshaError::CryptoError(format!(
@@ -195,7 +195,7 @@ pub async fn resolve_trust_domain(trust_domain: &str) -> HeshaResult<(String, Pu
                                 service_domain, trust_domain
                             )));
                         }
-                        
+
                         // Return the service domain and the public key
                         Ok((service_domain, info.public_key))
                     }
@@ -228,7 +228,10 @@ fn extract_domain_from_url(url: &str) -> HeshaResult<String> {
             Ok(without_protocol.to_string())
         }
     } else {
-        Err(HeshaError::CryptoError(format!("Invalid URL format: {}", url)))
+        Err(HeshaError::CryptoError(format!(
+            "Invalid URL format: {}",
+            url
+        )))
     }
 }
 
@@ -237,11 +240,11 @@ fn is_subdomain_of(subdomain: &str, parent: &str) -> bool {
     if subdomain == parent {
         return true;
     }
-    
+
     // Remove ports if present
     let subdomain = subdomain.split(':').next().unwrap_or(subdomain);
     let parent = parent.split(':').next().unwrap_or(parent);
-    
+
     // Check if subdomain ends with .parent
     subdomain.ends_with(&format!(".{}", parent))
 }
@@ -249,36 +252,36 @@ fn is_subdomain_of(subdomain: &str, parent: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_cache_operations() {
         let cache = IssuerKeyCache::new(Duration::from_secs(1));
         let key = PublicKey::from_bytes([42u8; 32]);
-        
+
         // Insert and retrieve
         cache.insert("example.com".to_string(), key.clone());
         assert_eq!(cache.get("example.com"), Some(key.clone()));
-        
+
         // Cache miss
         assert_eq!(cache.get("other.com"), None);
-        
+
         // Expiry
         std::thread::sleep(Duration::from_millis(1100));
         assert_eq!(cache.get("example.com"), None);
     }
-    
+
     #[test]
     fn test_cache_clear() {
         let cache = IssuerKeyCache::default();
         let key = PublicKey::from_bytes([42u8; 32]);
-        
+
         cache.insert("example.com".to_string(), key);
         assert!(cache.get("example.com").is_some());
-        
+
         cache.clear();
         assert!(cache.get("example.com").is_none());
     }
-    
+
     #[test]
     fn test_extract_domain_from_url() {
         assert_eq!(
@@ -295,7 +298,7 @@ mod tests {
         );
         assert!(extract_domain_from_url("invalid-url").is_err());
     }
-    
+
     #[test]
     fn test_is_subdomain_of() {
         assert!(is_subdomain_of("api.example.com", "example.com"));
@@ -303,7 +306,7 @@ mod tests {
         assert!(is_subdomain_of("example.com", "example.com"));
         assert!(!is_subdomain_of("example.com", "api.example.com"));
         assert!(!is_subdomain_of("other.com", "example.com"));
-        
+
         // Test with ports
         assert!(is_subdomain_of("api.example.com:3000", "example.com"));
         assert!(is_subdomain_of("api.example.com", "example.com:80"));

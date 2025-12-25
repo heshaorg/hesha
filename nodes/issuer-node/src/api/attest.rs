@@ -2,12 +2,12 @@
 
 use crate::state::AppState;
 use axum::{extract::State, Json};
+use chrono;
 use hesha_core::{attestation::AttestationBuilder, generate_proxy_number, ProxyGenerationInput};
 use hesha_crypto::generate_hex_nonce;
 use hesha_types::{PhoneNumber, PublicKey};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-use chrono;
 
 /// Request for attestation.
 #[derive(Debug, Deserialize)]
@@ -37,7 +37,7 @@ pub struct AttestationResponse {
 }
 
 /// Handle attestation request.
-/// 
+///
 /// This endpoint assumes the issuer has already verified the phone number
 /// through their own mechanism (SMS, carrier API, etc).
 pub async fn attest(
@@ -51,34 +51,32 @@ pub async fn attest(
             Json(json!({
                 "error": "invalid_version",
                 "error_description": "Only version 0.1.0-alpha is supported"
-            }))
+            })),
         ));
     }
-    
+
     // Parse phone number
-    let phone_number = PhoneNumber::new(&req.phone_number)
-        .map_err(|e| {
-            (
-                axum::http::StatusCode::BAD_REQUEST,
-                Json(json!({
-                    "error": "invalid_phone_number",
-                    "error_description": format!("Invalid phone number: {}", e)
-                }))
-            )
-        })?;
-    
+    let phone_number = PhoneNumber::new(&req.phone_number).map_err(|e| {
+        (
+            axum::http::StatusCode::BAD_REQUEST,
+            Json(json!({
+                "error": "invalid_phone_number",
+                "error_description": format!("Invalid phone number: {}", e)
+            })),
+        )
+    })?;
+
     // Parse public key
-    let user_pubkey = PublicKey::from_base64(&req.user_pubkey)
-        .map_err(|e| {
-            (
-                axum::http::StatusCode::BAD_REQUEST,
-                Json(json!({
-                    "error": "invalid_public_key",
-                    "error_description": format!("Invalid public key: {}", e)
-                }))
-            )
-        })?;
-    
+    let user_pubkey = PublicKey::from_base64(&req.user_pubkey).map_err(|e| {
+        (
+            axum::http::StatusCode::BAD_REQUEST,
+            Json(json!({
+                "error": "invalid_public_key",
+                "error_description": format!("Invalid public key: {}", e)
+            })),
+        )
+    })?;
+
     // Generate proxy number using new algorithm
     let nonce = generate_hex_nonce();
     let generation_input = ProxyGenerationInput {
@@ -88,18 +86,17 @@ pub async fn attest(
         scope: req.scope.clone(),
         nonce,
     };
-    
-    let proxy_number = generate_proxy_number(&generation_input)
-        .map_err(|e| {
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                Json(json!({
-                    "error": "proxy_generation_failed",
-                    "error_description": format!("Failed to generate proxy number: {}", e)
-                }))
-            )
-        })?;
-    
+
+    let proxy_number = generate_proxy_number(&generation_input).map_err(|e| {
+        (
+            axum::http::StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({
+                "error": "proxy_generation_failed",
+                "error_description": format!("Failed to generate proxy number: {}", e)
+            })),
+        )
+    })?;
+
     // Determine validity days - use request value if provided, otherwise config default
     let validity_days = match req.validity_days {
         Some(days) => {
@@ -110,14 +107,14 @@ pub async fn attest(
                     Json(json!({
                         "error": "invalid_validity_days",
                         "error_description": "Validity must be between 1 and 730 days"
-                    }))
+                    })),
                 ));
             }
             days
         }
-        None => state.config.attestation_validity_days
+        None => state.config.attestation_validity_days,
     };
-    
+
     // Create attestation using builder
     let mut builder = AttestationBuilder::new(
         state.config.domain.clone(),
@@ -127,33 +124,32 @@ pub async fn attest(
         user_pubkey.clone(),
     )
     .validity_days(validity_days);
-    
+
     // Add trust domain if configured
     if let Some(trust_domain) = &state.config.trust_domain {
         builder = builder.trust_domain(trust_domain.clone());
     }
-    
-    let attestation = builder.build_jwt()
-        .map_err(|e| {
-            (
-                axum::http::StatusCode::INTERNAL_SERVER_ERROR,
-                Json(json!({
-                    "error": "attestation_failed",
-                    "error_description": format!("Failed to create attestation: {}", e)
-                }))
-            )
-        })?;
-    
+
+    let attestation = builder.build_jwt().map_err(|e| {
+        (
+            axum::http::StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({
+                "error": "attestation_failed",
+                "error_description": format!("Failed to create attestation: {}", e)
+            })),
+        )
+    })?;
+
     tracing::info!(
         "Issued attestation for {} -> {} (validity: {} days)",
         phone_number,
         proxy_number,
         validity_days
     );
-    
+
     // Calculate expiration
     let expires_at = chrono::Utc::now().timestamp() + (validity_days * 24 * 3600);
-    
+
     Ok(Json(AttestationResponse {
         proxy_number: proxy_number.to_string(),
         attestation,
